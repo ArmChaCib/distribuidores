@@ -1,0 +1,308 @@
+2016-10-19T18:14:36+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/app/code/core/Mage/Core/Model/Config.php:1354
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Eav/Model/Entity/Abstract.php(661): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Eav/Model/Entity/Abstract.php(830): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Catalog/Model/Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(Mage_Catalog_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Core/Controller/Varien/Action.php(418): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Core/Controller/Varien/Router/Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Core/Controller/Varien/Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Core/Model/App.php(365): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-19T21:35:33+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-19T22:24:57+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-19T22:27:56+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-19T22:31:01+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T03:25:09+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T03:49:25+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T15:38:27+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T15:55:10+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T17:09:42+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T21:09:41+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T21:18:18+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-20T23:19:33+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-21T15:34:08+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-21T19:16:20+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-21T19:51:54+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-22T05:07:12+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-22T15:34:52+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-25T02:54:47+00:00 ERR (3): 
+exception 'Mage_Eav_Model_Entity_Attribute_Exception' with message 'The value of attribute "SKU" must be unique' in /home/oneclick/public_html/distribuidores/includes/src/__default.php:24564
+Stack trace:
+#0 /home/oneclick/public_html/distribuidores/app/Mage.php(463): Mage_Core_Model_Config->getModelInstance('eav/entity_attr...', 'The value of at...')
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(42875): Mage::getModel('eav/entity_attr...', 'The value of at...')
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(43044): Mage_Eav_Model_Entity_Abstract->walkAttributes('backend/validat...', Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product.php(189): Mage_Eav_Model_Entity_Abstract->validate(Object(SM_XB2b_Model_Product))
+#4 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php(1078): Mage_Catalog_Model_Product->validate()
+#5 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_ProductController->quickCreateAction()
+#6 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('quickCreate')
+#7 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#8 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#9 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#10 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#11 {main}
+2016-10-31T01:09:55+00:00 DEBUG (7): Exception message: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away, query was: SELECT IS_USED_LOCK(?);
+Trace: #0 /home/oneclick/public_html/distribuidores/includes/src/Varien_Db_Statement_Pdo_Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /home/oneclick/public_html/distribuidores/includes/src/__default.php(65695): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#2 /home/oneclick/public_html/distribuidores/includes/src/__default.php(54884): Zend_Db_Statement->execute(Array)
+#3 /home/oneclick/public_html/distribuidores/includes/src/__default.php(55921): Zend_Db_Adapter_Abstract->query('SELECT IS_USED_...', Array)
+#4 /home/oneclick/public_html/distribuidores/includes/src/__default.php(56859): Zend_Db_Adapter_Pdo_Abstract->query('SELECT IS_USED_...', Array)
+#5 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Resource_Helper_Mysql4.php(83): Varien_Db_Adapter_Pdo_Mysql->query('SELECT IS_USED_...', Array)
+#6 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Lock_Storage_Db.php(96): Mage_Index_Model_Resource_Helper_Mysql4->isLocked('oneclick_dist.i...')
+#7 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Lock.php(257): Mage_Index_Model_Lock_Storage_Db->isLockExists('index_process_8')
+#8 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Lock.php(227): Mage_Index_Model_Lock->_isLockExistsDb('index_process_8')
+#9 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Process.php(480): Mage_Index_Model_Lock->isLockExists('index_process_8', NULL)
+#10 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Indexer.php(430): Mage_Index_Model_Process->isLocked()
+#11 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Indexer.php(403): Mage_Index_Model_Indexer->_changeProcessKeyStatus(Object(Mage_Index_Model_Process), true)
+#12 /home/oneclick/public_html/distribuidores/includes/src/Mage_Index_Model_Indexer.php(323): Mage_Index_Model_Indexer->_changeKeyStatus(true)
+#13 /home/oneclick/public_html/distribuidores/includes/src/Mage_Catalog_Model_Product_Action.php(82): Mage_Index_Model_Indexer->processEntityAction(Object(Mage_Catalog_Model_Product_Action), 'catalog_product', 'mass_action')
+#14 /home/oneclick/public_html/distribuidores/app/code/core/Mage/Adminhtml/controllers/Catalog/Product/Action/AttributeController.php(116): Mage_Catalog_Model_Product_Action->updateAttributes(Array, Array, 0)
+#15 /home/oneclick/public_html/distribuidores/includes/src/__default.php(14272): Mage_Adminhtml_Catalog_Product_Action_AttributeController->saveAction()
+#16 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18750): Mage_Core_Controller_Varien_Action->dispatch('save')
+#17 /home/oneclick/public_html/distribuidores/includes/src/__default.php(18280): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#18 /home/oneclick/public_html/distribuidores/includes/src/__default.php(21176): Mage_Core_Controller_Varien_Front->dispatch()
+#19 /home/oneclick/public_html/distribuidores/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#20 /home/oneclick/public_html/distribuidores/index.php(83): Mage::run('', 'store')
+#21 {main}

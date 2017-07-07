@@ -1,0 +1,17 @@
+<div id="order-billing_method_form" style="display: none">
+    <div class="payment-methods">
+        <div id="p_method_checkmo" class="payment-method-item checkout-item">
+            <span id="checkmo_title">Check / Money order</span>
+        </div>
+    </div>
+    <div id="payment_method_validate"></div>
+    <input id="payment_method_hidden" name="payment[method]" value="checkmo" type="hidden"/>
+</div>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        order.setPaymentMethod('checkmo');
+    });
+
+</script>

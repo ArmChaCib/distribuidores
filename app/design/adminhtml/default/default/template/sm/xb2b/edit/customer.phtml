@@ -1,0 +1,24 @@
+<?php
+$currAdminId    = Mage::getSingleton('admin/session')->getUser()->getId();
+$quote          = Mage::registry("quote_edit_$currAdminId");
+$quotation      = Mage::registry("quotation_edit_$currAdminId");
+$customer       = Mage::getSingleton('customer/customer')->load($quotation->getCustomerId());
+$customerGroup  = $customer->getGroupId();
+$group          = Mage::getModel('customer/group')->load($customerGroup);
+?>
+<div class="search-customer">
+    <table class="">
+        <tr>
+            <td><strong>Customer Name: </strong><?php echo $customer->getFirstname() . ' ' . $customer->getLastname(); ?></td>
+            <td><strong>Customer Group: </strong><?php echo $group->getCode(); ?></td>
+        </tr>
+        <tr>
+            <td><strong>Mobile: </strong><?php
+                $billingAddress = $customer->getPrimaryBillingAddress();
+                if($billingAddress)
+                echo $billingAddress->getTelephone();
+                ?></td>
+            <td><strong>Email: </strong><?php echo $customer->getEmail(); ?></td>
+        </tr>
+    </table>
+</div>

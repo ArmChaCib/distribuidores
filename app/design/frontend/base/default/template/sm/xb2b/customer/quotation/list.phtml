@@ -1,0 +1,156 @@
+<?php $quotes = $this->getQuotes();
+$pageSize = $quotes->getPageSize();
+$numOfItem = $quotes->getSize();
+$pageCountDiv = $numOfItem % $pageSize;
+$currPage = $this->getCurrentPageNumb();
+$numOfPage = $this->getNumberOfPages();
+
+if(empty($currPage)) {
+    $currPage = 1;
+}
+
+if($pageCountDiv == 0) {
+    $pageCount = $numOfItem / $pageSize;
+} else {
+    $numOfItem -= $pageCountDiv;
+    $pageCount = ($numOfItem / $pageSize) + 1;
+}
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="group-title">Quotation list</h1>
+<!--            <span class="sub-text"><em>Set default addresses which used to create order</em></span>-->
+            <div class="hori-line"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="tbl-list-quote">
+                <thead>
+                <tr>
+                    <td class="number"><?php echo $this->__('ID #'); ?></td>
+                    <td><?php echo $this->__('Create Date'); ?></td>
+                    <td><?php echo $this->__('Expire Date'); ?></td>
+                    <td><?php echo $this->__('Shipto'); ?></td>
+                    <td class="number"><?php echo $this->__('Quote total'); ?></td>
+                    <td><?php echo $this->__('Quote status'); ?></td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($quotes as $quotation):
+                    $quote = Mage::getModel('sales/quote')->load($quotation->getQuoteId()); ?>
+                <tr>
+                    <td class="number"><?php echo $quotation->getId(); ?></td>
+                    <td><?php $createdDate = $quotation->getCreateDate(); if(!empty($createdDate)) echo date('m/d/Y', $createdDate); ?></td>
+                    <td><?php $expDate = $quotation->getExpiredDate(); if(!empty($expDate)) echo date('m/d/Y', $expDate); ?></td>
+                    <td><?php echo $quote->getShippingAddress() ? $this->escapeHtml($quote->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+                    <td class="number"><?php echo Mage::helper('checkout')->formatPrice($quote->getGrandTotal()); ?></td>
+                    <td><?php
+                        $quote_status = $quotation->getQuotationStatus();
+                        switch($quote_status) {
+                            case 0: echo 'Denied'; break;
+                            case 1: echo 'Pending'; break;
+                            case 2: echo 'Accepted'; break;
+                            case 3: echo 'Requested'; break;
+                        }
+                        ?></td>
+                    <td class="actions">
+                        <button class="btn btn-xs btn-primary btn-quote-detail" data-quote-id="<?php echo $quote->getId(); ?>" data-quotation-id="<?php echo $quotation->getId(); ?>">detail</button>
+                        <?php if($quote_status == 1 || $quote_status == 3): ?>
+                        <button class="btn btn-xs btn-danger btn-quote-deny">deny</button>
+                        <div class="deny-option">
+                            <span class="deny-warning-msg">Do you want to deny this quote?</span>
+                            <button class="btn btn-xs btn-primary btn-deny-yes" data-quotation-id="<?php echo $quotation->getId(); ?>">yes</button>
+                            <button class="btn btn-xs btn-default btn-deny-no" data-quote-id="<?php echo $quote->getId(); ?>">no</button>
+                            <a href="" class="btn-close">x</a>
+                        </div>
+                            <?php endif; ?>
+                        <?php if($quote_status == 1): ?>
+                        <button class="btn btn-xs btn-success btn-quote-accept">accept</button>
+                        <div class="checkout-option">
+                            <button class="btn btn-xs btn-primary btn-checkout-quick" data-quote-id="<?php echo $quote->getId(); ?>" data-quotation-id="<?php echo $quotation->getId(); ?>">quick</button>
+                            <button class="btn btn-xs btn-default btn-checkout-normal" data-quote-id="<?php echo $quote->getId(); ?>" data-quotation-id="<?php echo $quotation->getId(); ?>">normal</button>
+                            <a href="" class="btn-close">x</a>
+                        </div>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="6"></td>
+                </tr>
+                </tfoot>
+            </table>
+            <ul class="paging">
+                <?php
+                $range = 5;
+                $point = ceil($currPage / $range);
+
+                if($point == 1) $begin = 1;
+                else $begin = $range * ($point - 1) + 1;
+
+                $end = $begin + $range - 1;
+
+                if($numOfPage < $range) {
+                    $end = $numOfPage;
+                }
+
+                $begin -= 1;
+                ?>
+                <li>
+                    <a class="btn btn-xs btn-default" <?php if($begin == 0): ?>disabled="disabled"<?php endif; ?> href="<?php echo Mage::getUrl('xb2b/quotation').'?page='.($begin); ?>">&lt;</a>
+                </li>
+                <?php for($i=$begin;$i<$end;$i++): ?>
+                <li><a class="btn btn-xs <?php if($currPage == ($i+1)) echo 'btn-primary'; else echo 'btn-default'; ?>" href="<?php echo Mage::getUrl('xb2b/quotation').'?page='.($i+1); ?>"><?php echo ($i+1); ?></a></li>
+                <?php endfor; ?>
+                <li>
+                    <a class="btn btn-xs btn-default" <?php if($end + 1 > $numOfPage): ?>disabled="disabled"<?php endif; ?> href="<?php echo Mage::getUrl('xb2b/quotation').'?page='.($end+1); ?>">&gt;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dialogQuoteDetails" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Quote Details" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Quote</h4>
+            </div>
+            <div class="modal-body">
+                <div class="loading-box"></div>
+                <div class="data-holder clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-default btn-close-modal" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dialogCreateOrder" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Order Creating" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Order Creating</h4>
+            </div>
+            <div class="modal-body">
+                <h4 id="order_loading">Your order is being processed
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </h4>
+                <span class="order-error"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-default btn-close-modal" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

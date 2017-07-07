@@ -1,0 +1,630 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<link rel="stylesheet" type="text/css" href="https://cdn.shopify.com/s/files/1/1146/0918/t/2/assets/theme.scss.css?9897081875984993760">
+<div id="PageContainer" class="page-container is-moved-by-drawer">
+    <header class="site-header" role="banner">
+        <div class="site-header__upper page-width">
+            <div class="grid grid--table">
+              <div class="grid__item small--one-quarter medium-up--hide">
+                <button type="button" class="text-link site-header__link js-drawer-open-left">
+                  <span class="site-header__menu-toggle--open">
+                    <svg class="icon icon-hamburger" aria-hidden="true" focusable="false">
+                      <use xlink:href="#icon-hamburger"></use>
+                    </svg>
+                  </span>
+                  <span class="site-header__menu-toggle--close">
+                    <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                      <use xlink:href="#icon-close"></use>
+                    </svg>
+                  </span>
+                  <span class="icon__fallback-text">Navegación</span>
+                </button>
+              </div>
+              <div class="grid__item small--one-half medium-up--two-thirds small--text-center">
+                <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+                  <a href="/" itemprop="url" class="site-header__logo-link">
+                  <img src="//cdn.shopify.com/s/files/1/1146/0918/t/2/assets/logo.png?9897081875984993760" alt="airelibrelatam" itemprop="logo">
+                  </a>
+                </h1>
+              </div>
+              <div class="grid__item small--one-quarter medium-up--one-third text-right">
+                <div id="SiteNavSearchCart">
+                  <form action="/search" method="get" class="site-header__search small--hide" role="search">
+                    <div class="site-header__search-inner">
+                      <label for="SiteNavSearch" class="visually-hidden">Buscar</label>
+                      <input type="search" name="q" id="SiteNavSearch" placeholder="Buscar" aria-label="Buscar" class="site-header__search-input">
+                    </div>
+                    <button type="submit" class="text-link site-header__link site-header__search-submit">
+                      <svg class="icon icon-search" aria-hidden="true" focusable="false">
+                        <use xlink:href="#icon-search"></use>
+                      </svg>
+                      <span class="icon__fallback-text">Buscar</span>
+                    </button>
+                  </form>
+                  <a href="/cart" class="site-header__link site-header__cart">
+                    <svg class="icon icon-cart" aria-hidden="true" focusable="false">
+                      <use xlink:href="#icon-cart"></use>
+                    </svg>
+                    <span class="icon__fallback-text">Carrito</span>
+                    <span class="site-header__cart-indicator hide"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div id="StickNavWrapper">
+            <div id="StickyBar" class="sticky">
+              <nav class="nav-bar small--hide" role="navigation" id="StickyNav">
+                <div class="page-width">
+                  <div class="grid grid--table">
+                    <div class="grid__item seven-eighths" id="SiteNavParent">
+                      <button type="button" class="hide text-link site-nav__link site-nav__link--compressed js-drawer-open-left" id="SiteNavCompressed">
+                        <svg class="icon icon-hamburger" aria-hidden="true" focusable="false">
+                          <use xlink:href="#icon-hamburger"></use>
+                        </svg>
+                        <span class="site-nav__link-menu-label">Menú</span>
+                        <span class="icon__fallback-text">Navegación</span>
+                      </button>
+                      <ul class="site-nav list--inline" id="SiteNav">
+                        <li class="site-nav__item site-nav--active">
+                          <a href="/" class="site-nav__link">Home</a>
+                        </li>
+                        <li class="site-nav__item" aria-haspopup="true">
+                          <a href="/collections/cep" class="site-nav__link site-nav__meganav-toggle" id="SiteNavLabel-cep" data-aria-controls="SiteNavLinklist-cep">
+                            CEP
+                            <svg class="icon icon-arrow-down" aria-hidden="true" focusable="false">
+                              <use xlink:href="#icon-arrow-down"></use>
+                            </svg>
+                          </a>
+                          <div class="site-nav__dropdown meganav" id="SiteNavLinklist-cep" aria-labelledby="SiteNavLabel-cep" role="navigation">
+                            <ul class="meganav__nav page-width">
+                              <div class="grid grid--no-gutters meganav__scroller--has-list">
+                                <div class="grid__item meganav__list one-fifth meganav__list--has-title">
+                                  <h5 class="h1 meganav__title">CEP</h5>
+                                  <li>
+                                    <a href="/collections/cep" class="meganav__link">Todo CEP</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/cep-mujer" class="meganav__link">CEP Mujer</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/cep-hombre" class="meganav__link">CEP Hombre</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/cep-ortho" class="meganav__link">CEP Ortopédico</a>
+                                  </li>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/run-socks-2-0" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/WP45F3_large.JPG?v=1469206057" alt="Run Socks 2.0 Mujer" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Run Socks 2.0 Mujer</div>
+                                      <div class="product-card__price">
+                                        $ 928
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/run-tights-2-0" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/W4195C_large.JPG?v=1469206754" alt="Run Tights 2.0 Hombre" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Run Tights 2.0 Hombre</div>
+                                      <div class="product-card__price">
+                                        $ 2,993
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/no-show-socks" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/WP4670_large.JPG?v=1469218723" alt="No Show Socks Mujer" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">No Show Socks Mujer</div>
+                                      <div class="product-card__price">
+                                        $ 347
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/calf-sleeves-2-0" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/WS55S02_large.JPG?v=1469220345" alt="CEP Calf Sleeves 2.0 Hombre" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">CEP Calf Sleeves 2.0 Hombre</div>
+                                      <div class="product-card__price">
+                                        $ 673
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </ul>
+                          </div>
+                        </li>
+                        <li class="site-nav__item" aria-haspopup="true">
+                          <a href="/collections/cube-bikes" class="site-nav__link site-nav__meganav-toggle" id="SiteNavLabel-cube-bikes" data-aria-controls="SiteNavLinklist-cube-bikes">
+                            Cube Bikes
+                            <svg class="icon icon-arrow-down" aria-hidden="true" focusable="false">
+                              <use xlink:href="#icon-arrow-down"></use>
+                            </svg>
+                          </a>
+                          <div class="site-nav__dropdown meganav" id="SiteNavLinklist-cube-bikes" aria-labelledby="SiteNavLabel-cube-bikes" role="navigation">
+                            <ul class="meganav__nav page-width">
+                              <div class="grid grid--no-gutters meganav__scroller--has-list">
+                                <div class="grid__item meganav__list one-fifth meganav__list--has-title">
+                                  <h5 class="h1 meganav__title">Cube Bikes</h5>
+                                  <li>
+                                    <a href="/collections/cube-bikes" class="meganav__link">Todo Cube Bikes</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/accesorios-cube" class="meganav__link">Accesorios</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/cube-balatas" class="meganav__link">Balatas</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/cube-bombas" class="meganav__link">Bombas</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/cascos" class="meganav__link">Cascos</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/guantes" class="meganav__link">Guantes</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/ropa-cube" class="meganav__link">Ropa</a>
+                                  </li>
+                                </div>
+                                <div class="grid__item meganav__list one-fifth meganav__list--has-title">
+                                  <li>
+                                    <a href="/collections/zapatos-cube" class="meganav__link">Zapatos</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/mochilas-cube" class="meganav__link">Mochilas</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/cube-hangers" class="meganav__link">Hangers</a>
+                                  </li>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/casco-cube-am-race" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/16046_AM_RACE_BLACO_Y_NEGRO_large.png?v=1467838191" alt="Casco Cube AM Race" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Casco Cube AM Race</div>
+                                      <div class="product-card__price">
+                                        $ 2,175
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/casco-cube-pro" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/16043_PRO_VERDE_NEGRO_large.png?v=1467841969" alt="Casco Cube Pro" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Casco Cube Pro</div>
+                                      <div class="product-card__price">
+                                        $ 1,902
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/casco-cube-tour" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/16112_1_large.jpg?v=1490836440" alt="CASCO CUBE TOUR" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">CASCO CUBE TOUR</div>
+                                      <div class="product-card__price">
+                                        $ 1,434
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </ul>
+                          </div>
+                        </li>
+                        <li class="site-nav__item site-nav__item--no-columns" aria-haspopup="true">
+                          <a href="/collections/geigerrig" class="site-nav__link site-nav__meganav-toggle" id="SiteNavLabel-geigerrig" data-aria-controls="SiteNavLinklist-geigerrig">
+                            Geigerrig
+                            <svg class="icon icon-arrow-down" aria-hidden="true" focusable="false">
+                              <use xlink:href="#icon-arrow-down"></use>
+                            </svg>
+                          </a>
+                          <div class="site-nav__dropdown meganav" id="SiteNavLinklist-geigerrig" aria-labelledby="SiteNavLabel-geigerrig" role="navigation">
+                            <ul class="meganav__nav page-width">
+                              <div class="grid grid--no-gutters meganav__scroller--has-list">
+                                <div class="grid__item meganav__list one-fifth meganav__list--has-title">
+                                  <h5 class="h1 meganav__title">Geigerrig</h5>
+                                  <li>
+                                    <a href="/collections/hydratation-packs" class="meganav__link">Hydratation packs</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/accesorios" class="meganav__link">Accesorios</a>
+                                  </li>
+                                </div>
+                              </div>
+                            </ul>
+                          </div>
+                        </li>
+                        <li class="site-nav__item" aria-haspopup="true">
+                          <a href="/collections/hammer" class="site-nav__link site-nav__meganav-toggle" id="SiteNavLabel-hammer" data-aria-controls="SiteNavLinklist-hammer">
+                            Hammer
+                            <svg class="icon icon-arrow-down" aria-hidden="true" focusable="false">
+                              <use xlink:href="#icon-arrow-down"></use>
+                            </svg>
+                          </a>
+                          <div class="site-nav__dropdown meganav" id="SiteNavLinklist-hammer" aria-labelledby="SiteNavLabel-hammer" role="navigation">
+                            <ul class="meganav__nav page-width">
+                              <div class="grid grid--no-gutters meganav__scroller--has-list">
+                                <div class="grid__item meganav__list one-fifth meganav__list--has-title">
+                                  <h5 class="h1 meganav__title">Hammer</h5>
+                                  <li>
+                                    <a href="/collections/hammer" class="meganav__link">Todo Hammer</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/hammer-bar" class="meganav__link">Barras</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/fuels" class="meganav__link">Fuels</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/recovery" class="meganav__link">Recovery</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/suplementos" class="meganav__link">Suplementos</a>
+                                  </li>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/anti-fatigue-caps-hammer-nutrition-mexico" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/antifatigue_caps_60_hammer_nutrition_mexico_large.jpg?v=1491884325" alt="Anti-Fatigue Caps" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Anti-Fatigue Caps</div>
+                                      <div class="product-card__price">
+                                        $ 661
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/endurolytes-extreme-hammer-nutrition-mexico" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/endurolite_extreme_large.jpg?v=1491867048" alt="Endurolytes Extreme" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Endurolytes Extreme</div>
+                                      <div class="product-card__price">
+                                        De $ 517
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/endurolytes-fizz-hammer-nutrition-mexico" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/fizz_grape_hammer_nutririon_mexico_large.jpg?v=1491867193" alt="Endurolytes Fizz®" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Endurolytes Fizz®</div>
+                                      <div class="product-card__price">
+                                        De $ 143
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/hammer-endurolytes" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/endurolytes_120_caps_large.jpg?v=1491884474" alt="Endurolytes®" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Endurolytes®</div>
+                                      <div class="product-card__price">
+                                        $ 574
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </ul>
+                          </div>
+                        </li>
+                        <li class="site-nav__item" aria-haspopup="true">
+                          <a href="/collections/ultraspire" class="site-nav__link site-nav__meganav-toggle" id="SiteNavLabel-ultraspire" data-aria-controls="SiteNavLinklist-ultraspire">
+                            Ultraspire
+                            <svg class="icon icon-arrow-down" aria-hidden="true" focusable="false">
+                              <use xlink:href="#icon-arrow-down"></use>
+                            </svg>
+                          </a>
+                          <div class="site-nav__dropdown meganav" id="SiteNavLinklist-ultraspire" aria-labelledby="SiteNavLabel-ultraspire" role="navigation">
+                            <ul class="meganav__nav page-width">
+                              <div class="grid grid--no-gutters meganav__scroller--has-list">
+                                <div class="grid__item meganav__list one-fifth meganav__list--has-title">
+                                  <h5 class="h1 meganav__title">Ultraspire</h5>
+                                  <li>
+                                    <a href="/collections/ultraspire" class="meganav__link">Todo Ultraspire</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/race-vests" class="meganav__link">Chalecos</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/waist-belts" class="meganav__link">Cinturones</a>
+                                  </li>
+                                  <li>
+                                    <a href="/collections/botellas-recipientes" class="meganav__link">Botellas / Recipientes</a>
+                                  </li>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/alpha-2-0" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/UA050-ALPHA_2-0-RED-162112625-WEB_MEDIUM_large.jpg?v=1493999205" alt="ALPHA 2.0" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">ALPHA 2.0</div>
+                                      <div class="product-card__price">
+                                        $ 1,995
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/alpha-3-0" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/ALPHA-3.0-RED-1131437-WEB-SMALL_large.jpg?v=1493999178" alt="ALPHA 3.0" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">ALPHA 3.0</div>
+                                      <div class="product-card__price">
+                                        $ 2,550
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/astral" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/UA044-ASTRAL_-BLACK-161152850-WEB_MEDIUM_large.jpg?v=1456283272" alt="ASTRAL" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">ASTRAL</div>
+                                      <div class="product-card__price">
+                                        $ 2,274
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="grid__item one-fifth meganav__product">
+                                  <!-- /snippets/product-card.liquid -->
+                                  <a href="/products/bolsas-de-agua" class="product-card">
+                                    <div class="product-card__image-wrapper">
+                                      <img src="//cdn.shopify.com/s/files/1/1146/0918/products/UA041-1_L_Reservoir--086154457-WEB_MEDIUM_large.jpg?v=1456283078" alt="Bolsas de Agua" class="product-card__image">
+                                    </div>
+                                    <div class="product-card__info">
+                                      <div class="product-card__name">Bolsas de Agua</div>
+                                      <div class="product-card__price">
+                                        De $ 700
+                                      </div>
+                                    </div>
+                                    <div class="product-card__overlay">
+                                      <span class="btn product-card__overlay-btn  btn--narrow">Ver producto</span>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </ul>
+                          </div>
+                        </li>
+                        <li class="site-nav__item">
+                          <a href="/pages/tiendas" class="site-nav__link">Tiendas</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="grid__item one-fifth text-right">
+                      <div class="sticky-only" id="StickyNavSearchCart"></div>
+                      <div class="customer-login-links sticky-hidden">
+                        <a href="/account/login" id="customer_login_link">Cuenta</a>
+                        <a href="/account/register" id="customer_register_link">Sign up</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+              <div id="NotificationSuccess" class="notification notification--success" aria-hidden="true">
+                <div class="page-width notification__inner notification__inner--has-link">
+                  <a href="/cart" class="notification__link">
+                  <span class="notification__message">¡Artículo agregado al carrito! <span>Ver carrito y finalizar</span>.</span>
+                  </a>
+                  <button type="button" class="text-link notification__close">
+                    <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                      <use xlink:href="#icon-close"></use>
+                    </svg>
+                    <span class="icon__fallback-text">Cerrar</span>
+                  </button>
+                </div>
+              </div>
+              <div id="NotificationError" class="notification notification--error" aria-hidden="true">
+                <div class="page-width notification__inner">
+                  <span class="notification__message notification__message--error" aria-live="assertive" aria-atomic="true"></span>
+                  <button type="button" class="text-link notification__close">
+                    <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                      <use xlink:href="#icon-close"></use>
+                    </svg>
+                    <span class="icon__fallback-text">Cerrar</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </header>
+</div>
+<!--
+    <div class="header-language-background">
+        <div class="header-language-container">
+            <div class="store-language-container">
+                <?php echo $this->getChildHtml('store_language') ?>
+            </div>
+
+            <?php echo $this->getChildHtml('currency_switcher') ?>
+
+            <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getChildHtml('accountLinks') ?></p>
+        </div>
+    </div>
+-->
+
+<!--
+    <header id="header" class="page-header">
+        <div class="page-header-container">
+            <a class="logo" href="<?php echo $this->getUrl('') ?>">
+                <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+                <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+            </a>
+
+            <?php // In order for the language switcher to display next to logo on smaller viewports, it will be moved here.
+                  // See app.js for details ?>
+            <div class="store-language-container"></div>
+
+
+            <div class="skip-links">
+                <a href="#header-nav" class="skip-link skip-nav">
+                    <span class="icon"></span>
+                    <span class="label"><?php echo $this->__('Menu'); ?></span>
+                </a>
+
+                <a href="#header-search" class="skip-link skip-search">
+                    <span class="icon"></span>
+                    <span class="label"><?php echo $this->__('Search'); ?></span>
+                </a>
+
+                <div class="account-cart-wrapper">
+                    <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
+                        <span class="icon"></span>
+                        <span class="label"><?php echo $this->__('Account'); ?></span>
+                    </a>
+
+
+                    <div class="header-minicart">
+                        <?php echo $this->getChildHtml('minicart_head'); ?>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div id="header-nav" class="skip-content">
+                <?php echo $this->getChildHtml('topMenu') ?>
+            </div>
+
+
+            <div id="header-search" class="skip-content">
+                <?php echo $this->getChildHtml('topSearch') ?>
+            </div>
+
+
+            <div id="header-account" class="skip-content">
+                <?php echo $this->getChildHtml('topLinks') ?>
+            </div>
+        </div>
+    </header>
+-->
+
+<?php echo $this->getChildHtml('topContainer'); ?>

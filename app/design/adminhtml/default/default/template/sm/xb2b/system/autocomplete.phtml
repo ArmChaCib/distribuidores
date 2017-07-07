@@ -1,0 +1,31 @@
+<ul style="overflow: auto; height: 400px;">
+    <?php if (count($items) == 0) { ?>
+        <li id="no_result"><span>No matching results</span></li>
+    <?php } ?>
+    <?php foreach ($items as $item): ?>
+        <li<?php foreach ($item as $k => $v): ?> <?php echo $k ?>="<?php echo $v ?>"<?php endforeach;?>>
+        <div style="float:right; color:red; font-weight:bold;">[<?php echo $item['type'] ?>]</div>
+        <strong><?php echo $this->htmlEscape($item['name']) ?></strong><br/>
+        <?php if (sizeof($items) == 1): ?>
+            <script type="text/javascript">alert($$('li#<?php echo $item['id'] ?>').first());</script>
+        <?php endif;?>
+    </li>
+     <?php if (isset($item['country_id'])): ?>
+            <li id="dataregion_<?php echo $item['id']; ?>" style="display:none !important;">
+                <?php $regionCollection = Mage::getModel('directory/region_api')->items($item['country_id']); ?>
+                <select name='customer[region]' id='customer:region' class="validate-select">
+                    <option>Please select region, state or province</option>
+                    <?php
+                    foreach ($regionCollection as $region) {
+                        ?>
+                        <option value="<?php echo $region['region_id'] ?>" id="<?php echo $region['region_id']; ?>"
+                                <?php if ($region['region_id'] == $item['billing_region_id']): ?>selected="selected"<?php endif; ?>><?php echo $region['name'] ?></option>
+                    <?php
+                    }
+                    ?>
+
+                </select>
+            </li>
+        <?php endif;?>
+<?php endforeach ?>
+</ul>

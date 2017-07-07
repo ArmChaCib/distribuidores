@@ -1,0 +1,67 @@
+<?php $currCustAddresses = $this->getAllAddresses(); ?>
+<?php $setting = $this->getCustomerB2BSetting(); ?>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="group-title">Address settings</h1>
+            <span class="sub-text"><em>Set default addresses which used to create order</em></span>
+            <div class="hori-line"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <form action="<?php echo Mage::getBaseUrl().'xb2b/setting/address'; ?>" method="post">
+                <div class="form-group">
+                    <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>"/>
+                    <label class="control-label" for="default_billing_address">BILLING ADDRESS</label>
+                    <select class="form-control input-sm" id="default_billing_address" name="default_billing_address">
+                        <option value=""></option>
+                        <?php foreach($currCustAddresses as $custAddr): ?>
+                        <option value="<?php echo $custAddr->getId(); ?>"
+                            <?php if($setting['default_billing'] == $custAddr->getId()): ?> selected <?php endif; ?>>
+                            <?php echo $custAddr->getName(); ?> ,
+                            <?php echo $custAddr->getCompany(); ?> ,
+                            <?php
+                                $street = $custAddr->getStreet();
+                                if(count($street) > 0) {
+                                    echo $street[0] . ',';
+                                }
+                            ?>
+                            <?php echo $custAddr->getCity(); ?> ,
+                            <?php echo $custAddr->getPostcode(); ?> ,
+                            <?php echo $custAddr->getCountry(); ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="default_shipping_address">SHIPPING ADDRESS</label>
+                    <select class="form-control input-sm" id="default_shipping_address" name="default_shipping_address">
+                        <option value=""></option>
+                        <?php foreach($currCustAddresses as $custAddr): ?>
+                            <option value="<?php echo $custAddr->getId(); ?>"
+                                <?php if($setting['default_shipping'] == $custAddr->getId()): ?> selected <?php endif; ?>>
+                                <?php echo $custAddr->getName(); ?> ,
+                                <?php echo $custAddr->getCompany(); ?> ,
+                                <?php
+                                $street = $custAddr->getStreet();
+                                if(count($street) > 0) {
+                                    echo $street[0] . ',';
+                                }
+                                ?>
+                                <?php echo $custAddr->getCity(); ?> ,
+                                <?php echo $custAddr->getPostcode(); ?> ,
+                                <?php echo $custAddr->getCountry(); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Update"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

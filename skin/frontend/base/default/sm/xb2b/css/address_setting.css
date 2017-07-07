@@ -1,0 +1,5 @@
+.container {width: 100%; }
+.btn { border-radius: 1px; }
+.form-control { border-radius: 1px; }
+.hori-line { width: 100%; height: 1px; background: #ccc; margin-bottom: 20px; }
+.group-title { margin-bottom: 0; }

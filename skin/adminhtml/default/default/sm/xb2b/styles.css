@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.clearfix { zoom: 1; }
+.clearfix:after { clear: both; }
+.clearfix:before, .clearfix:after { content: '\0020'; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0; }
+
+/*====================================style==========================*/
+
+.quote-title { display: block; width: 80%; float: left; font-size: 2em }
+.button-action { width: 20%; float: left; }
+.button-action .btn-save-quote { font-size: 1.4em; padding: 5px 10px; float: right }
+
+/*.quote-add button { border: none; }*/
+.quote-add ul li { list-style: none; }
+
+.quote-add a { text-decoration: none; color: #333333; cursor: pointer; }
+.quote-add input[type="text"], input[type="email"], input[type="password"], select, input[type="number"] {
+    background-color: #FFFFFF;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    color: #AAAAAA;
+    font-size: 1em;
+    padding: 2%;
+    width: 84%;
+}
+.quote-add input[type="checkbox"]{
+    cursor: pointer;
+}
+
+.quote-add table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    width: 100%;
+}
+.quote-add table tr td {
+    word-wrap: break-word;
+}
+.quote-add caption, th, td {
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+}
+.quote-add .a-left{ text-align: left}
+.quote-add .a-right{ text-align: right}
+.quote-add .a-center{ text-align: center}
+
+/*===============Search=====================*/
+.quote-add .search-customer{
+    width: 45%; /*height: 110px*/;
+	background-color: #DDDDDD;
+    border-radius: 2px;
+   	text-transform: uppercase;
+    padding: 1%;
+    margin-left: 5%;
+    float: left;
+}
+.quote-add .search{ position: relative; display: inline-block; /*margin-bottom: 20px;*/}
+.quote-add .search label{
+	display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 181px;
+}
+
+.quote-add .search input{
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    color: #AAAAAA;
+    font-size: 14px;
+    padding: 7px 30px 7px 7px;
+    width: 282px;
+}
+.quote-add .search button{
+    border: none;
+    background: transparent url("images/search-icon.png") no-repeat;
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    right: 7px;
+    top: 7px;
+}
+.quote-add .search-product{
+    width: 45%;
+	padding: 1% 1% 1% 1%;
+    float: left;
+	position: relative;
+	display: block;
+}
+.quote-add .search-result{ overflow: hidden;}
+.quote-add .search-result ul li{
+	width: 43%;
+	float: left;
+	text-transform: none;
+    margin-bottom: 8px;
+}
+.quote-add .search-result ul li label{
+	font-weight: 700;
+	margin-right: 5px;
+	margin-bottom: 7px;
+}
+.quote-add .search-result ul li a{
+	color: #0000EE;
+	text-decoration: underline;
+	margin-left: 10px;
+}
+
+/*===============Table order========================*/
+#items_area {
+    width: 75%;
+    float: left;
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+.quote-add .order-edit{
+	/*margin-top: 32px;*/
+}
+.quote-add .order-edit table tr td{
+    border-bottom: 1px solid #DDDDDD;
+    font-size: 1em;
+    padding: 5px;
+}
+.quote-add .order-edit table tr td.qty, .order-edit table tr td.price{ padding: 9px 4px 11px; }
+.quote-add .order-edit table tr th{
+	border-bottom: 1px solid #333333;
+    font-size: 1em;
+    font-weight: 700;
+    padding: 5px;
+}
+.quote-add .order-edit table tr td input.input-text{
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-align: center;
+    padding: 3px 5px;
+}
+.quote-add .order-edit table tr td input.input-price{
+	text-align: right;
+}
+.quote-add .order-edit table tr td input.input-qty{
+	width: 50px;
+}
+.quote-add .order-edit table tr.hover:hover td{
+    background-color: #f7f7f7;
+}
+
+.quote-sidebar {
+    display: block; width: 24%; margin: 20px 0 0 1%; float: left;
+}
+/*============subtotal===========================*/
+.quote-add .emph, .accent {
+    color: #EB5E00 !important;
+}
+.quote-add .subtotal{
+    padding-top: 10px;
+}
+.quote-add .subtotal table tr td input.input-discount {
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    text-align: right;
+    padding: 3px 5px;
+    width: 70px;
+}
+.quote-add .subtotal table tr td.label{ vertical-align: middle; padding-right: 15px;}
+.quote-add .subtotal table tr td{ padding: 3px; font-size: 1em}
+
+/*==================action========================*/
+.datepicker .ui-datepicker-trigger { margin-left: 1%; width: 10%; text-align: center; padding: 5px 0 6px 0 }
+
+.label-comment { font-weight: bold; display: block; margin-top: 20px; border-bottom: 1px solid #eee; color: #666 }
+.comment-history { margin-bottom: 10px; margin-top: 5px; font-size: .9em }
+#customer_note { width: 92%; height: 80px; padding: 1%; border-radius: 2px; resize: vertical }
+.btn-remove-customer { display: block }
+
+.quote-add .action{
+    background-color: #DDDDDD;
+    padding: 20px 0 20px 20px;
+    overflow: hidden;
+}
+.quote-add .action .item{
+    float: left;
+    width: 50%;
+}
+.quote-add .action ul li{
+    margin-bottom: 13px;
+}
+.quote-add .action input.input-text{
+    width: 270px;
+}
+.quote-add .action .datepicker{ position: relative; display: inline-block; margin-left: 23px;}
+.quote-add .action button.datePicker_Icon{
+    background: url("images/calendar.png") no-repeat scroll left top;
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    height: 16px;
+    line-height: 0;
+    padding: 0;
+    position: absolute;
+    text-indent: -9000em;
+    vertical-align: top;
+    width: 16px;
+    top: 6px;
+    right: 6px;
+}
+.quote-add .action textarea{
+    border: medium none;
+    height: 90px;
+    padding: 5px 8px;
+    resize: none;
+    width: 271px;
+    border-radius: 4px;
+}
+.quote-add .action .input-check{ vertical-align: top;}
+.quote-add .action .checkbox{ margin-right: 8px; cursor: pointer;}
+.quote-add .action .button-action{ float: left;margin-top: 146px;}
+.quote-add .action .button-action button{
+    border: 1px solid;
+    padding: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #333333;
+    background: -webkit-linear-gradient(#ffffff, #eeeeee);
+    background: -o-linear-gradient(#ffffff, #eeeeee);
+    background: -moz-linear-gradient(#ffffff, #eeeeee);
+    background: linear-gradient(#ffffff, #eeeeee);
+}
+
+.entry-edit{
+    /*padding: 0px 24px 24px 24px;*/
+}
+
+#customer_search_result{
+    margin-top:10px;
+}
+
+.order-totals{
+    background: none !important;
+    border: 0px !important;
+}
+
+
+.quote-add .order-edit{
+    max-height: 375px;
+    overflow-y: auto;
+}
+
+.mr10{
+    margin-right: 10px;
+}

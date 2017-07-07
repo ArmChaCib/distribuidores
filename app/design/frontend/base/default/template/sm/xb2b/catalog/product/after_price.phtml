@@ -1,0 +1,171 @@
+<?php
+
+$_product   = $this->getProduct();
+echo $this->getChildHtml('child_'.$_product->getId());
+$quote      = Mage::getModel('checkout/cart')->getQuote();
+$XB2B       = Mage::helper('xb2b')->loadXB2BConfig();
+
+?>
+
+<?php switch($_product->getTypeId()) {
+    case Mage_Catalog_Model_Product_Type::TYPE_BUNDLE:
+        $attributesTable            = array();
+        // Get the items which are linked with a bundle product
+        $selectionCollection = $_product->getTypeInstance(true)->getSelectionsCollection(
+            $_product->getTypeInstance(true)->getOptionsIds($_product), $_product
+        );
+
+        //Render output
+        $productHtml  = '<div class="product-list"><table class="attr-list">';
+        foreach($selectionCollection as $k => $product) {
+            if(!$product->isSaleable()) {
+                continue;
+            }
+            $quoteItem          = $quote->getItemByProduct($product);
+            if($quoteItem)
+                $availableQty   = $product->getStockQuantity() - (int)$quoteItem->getQty();
+            else
+                $availableQty   = $product->getStockQuantity();
+
+            $placeHolder    = 'placeholder="0"';
+            if($XB2B['show_qty_stock']) {
+                $placeHolder = 'placeholder="0/'.$availableQty.'"';
+            }
+            // Get attributes
+            $_imgSize = 300;
+            $attrStr = '<tr>';
+            $attrStr    .= '<td><a target="_blank" href="'.$product->getProductUrl().'" class="child-item-url" data-thumb="'.$this->helper('catalog/image')->init($product, 'small_image')->keepFrame(false)->resize($_imgSize).'">'.$product->getName().'</a></td>';
+            $attrStr    .= '<td><input data-type-id="'.$_product->getTypeId().'" type="text"
+                                       class="input-text ord-quantity ord-complex"
+                                       data-inventory-qty="'.$availableQty.'"
+                                       data-backorder="'.$XB2B['enable_backorder'].'"
+                                       data-maxsaleqty="'.$XB2B['max_sale_qty'].'"
+                                       '.$placeHolder.' data-pid="'.$product->getId().'"></td>';
+            $productHtml    .= $attrStr.'</tr>';
+        }
+        $productHtml        .= '</table></div>';
+        echo $productHtml;
+        break;
+    case Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE:
+        $attributesTable            = array();
+        $productAttributeOptions    = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+        foreach ($productAttributeOptions as $productAttribute) {
+            $attributesTable[] = $productAttribute['attribute_code'];
+        }
+
+        $relatedProducts    = $_product->getTypeInstance(true)->getUsedProducts(null, $_product);
+        $productHtml        = '<div class="product-list"><table class="attr-list">';
+        $eavConfig          = Mage::getSingleton("eav/config");
+
+        $productHtml .= '<tr>';
+        foreach($attributesTable as $column) {
+            $attrStr .= '<td class="column-header">'.ucwords($column).'</td>';
+        }
+        $attrStr .= '<td class="column-header">Qty</td>';
+        $productHtml .= $attrStr;
+        $productHtml .= '</tr>';
+
+        foreach($relatedProducts as $k => $product) {
+            if(!$product->isSaleable()) {
+                continue;
+            }
+            $attributeDetails = Mage::getSingleton("eav/config")
+                                      ->getAttribute("catalog_product", $product['attribute_code']);
+            // Get attributes
+            $attrStr = '<tr>';
+            foreach($attributesTable as $attrCode) {
+                $func   = 'get'.ucwords($attrCode);
+                $attributeDetails = $eavConfig->getAttribute("catalog_product", $attrCode);
+                $value  = $attributeDetails->getSource()->getOptionText($product->{$func}());
+                $attrStr .= '<td>'.$value.'</td>';
+            }
+
+            $quoteItem      = $quote->getItemByProduct($product);
+            if($quoteItem)
+                $availableQty   = $product->getStockQuantity() - (int)$quoteItem->getQty();
+            else
+                $availableQty   = $product->getStockQuantity();
+
+            $placeHolder = 'placeholder="0"';
+            if($XB2B['show_qty_stock']) {
+                $placeHolder = 'placeholder="0/'.$availableQty.'"';
+            }
+
+            $attrStr    .= '<td><input data-type-id="'.$_product->getTypeId().'" type="text"
+                                       class="input-text ord-quantity ord-complex"
+                                       data-inventory-qty="'.$availableQty.'"
+                                       data-backorder="'.$XB2B['enable_backorder'].'"
+                                       data-maxsaleqty="'.$XB2B['max_sale_qty'].'"
+                                       '.$placeHolder.' data-pid="'.$product->getId().'"></td>';
+            $productHtml    .= $attrStr.'</tr>';
+        }
+        $productHtml        .= '</table></div>';
+        echo $productHtml;
+        break;
+    case Mage_Catalog_Model_Product_Type::TYPE_GROUPED:
+        $relatedProducts    = $_product->getTypeInstance(true)->getAssociatedProducts($_product);
+        $eavConfig          = Mage::getSingleton("eav/config");
+
+        $productHtml        = '<div class="product-list"><table class="attr-list">';
+        $productHtml        .= '<tr>';
+        $productHtml        .=      '<td class="column-header">Name</td>';
+        $productHtml        .=      '<td class="column-header">Qty</td>';
+        $productHtml        .= '</tr>';
+
+        foreach($relatedProducts as $k => $product) {
+            if(!$product->isSaleable()) {
+                continue;
+            }
+            $quoteItem          = $quote->getItemByProduct($product);
+            if($quoteItem)
+                $availableQty   = $product->getStockQuantity() - (int)$quoteItem->getQty();
+            else
+                $availableQty   = $product->getStockQuantity();
+
+            $placeHolder = 'placeholder="0"';
+            if($XB2B['show_qty_stock']) {
+                $placeHolder = 'placeholder="0/'.$availableQty.'"';
+            }
+
+            $productHtml    .= '<tr>';
+            $productHtml        .= '<td>'.$product->getName().'</td>';
+            $productHtml        .= '<td><input type="text" data-type-id="'.$_product->getTypeId().'"
+                                       class="input-text ord-quantity ord-complex"
+                                       data-inventory-qty="'.$availableQty.'"
+                                       data-backorder="'.$XB2B['enable_backorder'].'"
+                                       data-maxsaleqty="'.$XB2B['max_sale_qty'].'"
+                                       '.$placeHolder.'
+                                       data-pid="'.$product->getId().'"></td>';
+            $productHtml    .= '</tr>';
+        }
+        $productHtml        .= '</table></div>';
+        echo $productHtml;
+        break;
+    case Mage_Catalog_Model_Product_Type::TYPE_VIRTUAL:
+        break;
+    case Mage_Catalog_Model_Product_Type::TYPE_SIMPLE: ?>
+        <label for=""
+               <?php if(!($_product->isSaleable() && !$_product->canConfigure())): ?>class="disabled-component"<?php endif; ?>>
+            Enter QTY: </label>
+        <?php
+        $quoteItem      = $quote->getItemByProduct($_product);
+        if($quoteItem)
+            $availableQty   = $_product->getStockQuantity() - (int)$quoteItem->getQty();
+        else
+            $availableQty   = $_product->getStockQuantity();
+
+        $placeHolder = 'placeholder="0"';
+        if($XB2B['show_qty_stock']) {
+            $placeHolder = 'placeholder="0/'.$availableQty.'"';
+        }
+        ?>
+        <input type="text" data-type-id="<?php echo $_product->getTypeId(); ?>"
+               class="input-text ord-quantity"
+               data-inventory-qty="<?php echo $availableQty; ?>"
+               data-backorder="<?php echo $XB2B['enable_backorder']; ?>"
+               data-maxsaleqty="<?php echo $XB2B['max_sale_qty']; ?>"
+            <?php if(!($_product->isSaleable() && !$_product->canConfigure())): ?> disabled style="visibility: hidden"<?php endif ?>
+               <?php echo $placeHolder; ?> data-pid="<?php echo $_product->getId(); ?>"/>
+        <?php
+        break;
+} ?>

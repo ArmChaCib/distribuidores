@@ -1,0 +1,241 @@
+<?php
+$XB2B = Mage::helper('xb2b')->loadXB2BConfig();
+$XB2B_jSon = Mage::helper('core')->jsonEncode($XB2B);
+
+$quote                  = $this->getQuote();
+$itemsInCart            = $quote->getAllItems();
+$defaultShipping        = $this->getDefaultShippingAddress('json');
+$quoteBillingAddress    = $this->getQuoteBillingAddress();
+?>
+
+<script type="text/javascript">
+    var TheMageURL                  = '<?php echo Mage::getBaseUrl(); ?>';
+    var QuickOrderURL               = '<?php echo Mage::getBaseUrl().'xb2b'; ?>';
+    var DefaultShippingAddressJSON  = '<?php echo $defaultShipping; ?>';
+    var QuoteBillAddress            = '<?php echo $quoteBillingAddress->getId(); ?>';
+    var MediaUrl                    = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>';
+    var XB2B                        = JSON.parse('<?php echo $XB2B_jSon; ?>');
+
+</script>
+<div class="container fx-container">
+    <div class="row">
+        <div class="col-md-12"><h2>Quick Order</h2></div>
+        <input type="hidden" value="<?php echo $this->getUrlEncode(); ?>" id="the_uenc" />
+        <input type="hidden" value="<?php echo $this->getFormKey(); ?>" id="the_formkey" />
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="" id="search-form">
+                <select name="" id="" class="slb-search-type">
+                    <option value="id">Product ID</option>
+                    <option value="sku">SKU</option>
+                </select>
+                <input class="btn btn-primary btn-search-product" type="submit" value="Search">
+                <input type="text" autocomplete="off" id="txt_search" class="input-text"/>
+                <label for="txt_search">Search/Scan Product ID</label>
+                <div class="suggestion">
+                    <ul class="result"></ul>
+                </div>
+            </form>
+            <a href="" class="btn-open-import-csv">Import from CSV</a>
+            <form action="<?php echo Mage::getBaseUrl(); ?>xb2b/QuickOrder/importCSV"
+                  id="frm_upload_csv"
+                  method="post"
+                  enctype="multipart/form-data">
+                <div id="dropzone">
+                    <span class="drop-text">Drop File Here</span>
+                    <button class="btn btn-primary btn-sm browse clearfix">
+                        <span>Browse</span>
+                        <img class="loading deactivate"
+                             src="<?php echo $this->getSkinUrl('sm/xb2b/images/loading.gif'); ?>" alt="Uploading..."/>
+                    </button>
+                    <input type="file" name="input_csv" />
+                    <input type="hidden" value="<?php echo $this->getUrlEncode(); ?>" name="uenc" />
+                    <input type="hidden" value="<?php echo $this->getFormKey(); ?>" name="form_key" />
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-5 col-md-push-1">
+            <div class="quickorder-total">
+<!--                <div class="loading-panel alpha60"></div>-->
+                <table class="total-tbl">
+                    <tr>
+                        <td>Subtotal</td>
+                        <td>
+                            <span class="top-subtotal">
+                                <?php echo Mage::helper('core')->
+                                    currency($quote->getData('subtotal'), true, false); ?>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Grand Total
+                        </td>
+                        <td align="right">
+                            <strong>
+                                <span class="top-grand-total"><?php echo Mage::helper('core')->
+                                        currency($quote->getData('grand_total'), true, false); ?></span>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 box-result">
+            <?php if(count($itemsInCart) == 0): ?>
+            <span class="pre-text">No products added</span>
+            <?php endif ?>
+            <table class="tbl-selected-products data-table">
+                <thead>
+                    <tr>
+                        <td>Image</td>
+                        <td>Product Name</td>
+                        <td class="col-num">Order Quantity</td>
+                        <td class="col-num">Unit Price</td>
+                        <td class="col-num">Total Price</td>
+                        <td class="col-act">Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach($itemsInCart as $item): ?>
+                    <?php $product = $item->getData('product'); ?>
+                    <tr class="prod-<?php echo $product->getId(); ?> item"
+                        data-item-id="<?php echo $item->getId(); ?>"
+                        data-prod-id="<?php echo $product->getId(); ?>">
+                        <td><img class="prod-thumb" src="<?php echo $product->getSmallImageUrl(); ?>" /></td>
+                        <td><a target="_blank" href="<?php echo $product->getProductUrl(); ?>">
+                                <?php echo $product->getName(); ?></a></td>
+                        <td>
+                            <div class="qty-box">
+                                <input type="text" placeholder="0" value="<?php echo $item->getQty(); ?>"
+                                       data-id="<?php echo $product->getId(); ?>"
+                                       data-inventory-qty="<?php echo $product->getStockQuantity(); ?>"
+                                       class="init-qty clear-fix qty-<?php echo $product->getId(); ?>" />
+                                <button class="btn btn-sm btn-primary btn-update-qty" disabled
+                                        data-item-id="<?php echo $item->getId(); ?>"
+                                        data-pid="<?php echo $product->getId(); ?>">Update</button>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="price-<?php echo $item->getId(); ?> unit-price">
+                                <?php echo Mage::helper('core')->currency($item->getPrice(), true, false); ?>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="total-price-<?php echo $item->getId(); ?> total-price">
+                                <?php
+                                $total_price = $item->getPrice() * $item->getQty();
+                                echo Mage::helper('core')->currency($total_price, true, false);
+                                ?>
+                            </span>
+                        </td>
+                        <td>
+                            <a class="btn-remove btn-remove2 btn-remove-item"
+                               data-item-id="<?php echo $item->getId(); ?>"
+                               data-id="" title="Remove Item" href="">Remove Item</a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><button class="btn btn-primary btn-xs btn-update-all-rows" disabled>Update all</button></td>
+                    <td></td>
+                    <td><span class="bot-subtotal" data-total="0">
+                            <?php echo Mage::helper('core')->currency($quote->getData('subtotal'), true, false); ?>
+                        </span></td>
+                    <td><button class="btn btn-danger btn-xs btn-delete-all-rows" <?php if(count($itemsInCart) == 0): ?>disabled="disabled" <?php endif; ?>>Delete all</button></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 box-checkout clearfix">
+            <div class="comment-group">
+                <span class="comment-label">Comment</span>
+                <textarea class="form-control txt-order-comment" placeholder="..."></textarea>
+            </div>
+            <div class="chout-group">
+                <?php if($XB2B['enable_quotation']): ?>
+                <button class="btn btn-primary btn-request-a-quote">Request a quote</button>
+                <?php endif; ?>
+                <a href="<?php echo Mage::getBaseUrl().'checkout/cart' ?>" class="btn btn-primary">Go to checkout</a>
+                <?php if($XB2B['enable_one_click']): ?>
+                    <button class="btn btn-success btn-place-order">Place order</button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dialogCreateOrder" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Order Creating" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Order Creating</h4>
+            </div>
+            <div class="modal-body">
+                <h4 id="order_loading">Your order is being processed
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </h4>
+                <span class="order-error"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-default btn-close-modal" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-primary btn-continue-shop">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dialogImportError" data-keyboard="false" data-backdrop="static"
+     tabindex="-1" role="dialog" aria-labelledby="Import Error" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Warning</h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-caption">Importing has error because:</span>
+                <ul class="error-list"></ul>
+                <span class="error-notice"><em>*The valid records still imported normally</em></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dialogRequestQuote" data-keyboard="false" data-backdrop="static"
+     tabindex="-1" role="dialog" aria-labelledby="Request Quote" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Request a quote</h4>
+            </div>
+            <div class="modal-body">
+                <h4 class="request-message">Your quote is being sent...</h4>
+<!--                <textarea class="request-message" placeholder="Enter your note..."></textarea>-->
+            </div>
+            <div class="modal-footer">
+<!--                <button type="button" class="btn btn-sm btn-primary btn-send-quote-request">Send</button>-->
+                <button type="button" class="btn btn-sm btn-primary btn-close-request" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

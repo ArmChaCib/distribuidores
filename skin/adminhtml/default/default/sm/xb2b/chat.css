@@ -1,0 +1,261 @@
+#xb2b_status_bar {
+    cursor: pointer;
+    background: #eb5e00;
+    bottom: 0;
+    /*border: 1px solid #bbb;*/
+    height: 30px;
+    position: fixed;
+    width: 200px;
+    right: 10px;
+    z-index: 999;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+#xb2b_status_bar .default-text {
+    color: white;
+    line-height: 30px;
+    text-align: center;
+    display: none;
+    font-size: 1.2em;
+}
+
+#xb2b_status_bar .default-text.active { display: block }
+
+#xb2b_status_bar .notification-text {
+    color: white;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    font-size: 1.2em;
+}
+
+#xb2b_status_bar .notification-text.active { display: block }
+
+#xb2b_main_box {
+    display: none;
+    background: #ddd;
+    bottom: 0;
+    border: 1px solid #bbb;
+    height: 400px;
+    position: fixed;
+    width: 700px;
+    right: 10px;
+    z-index: 999;
+    box-shadow: 1px 1px 2px #bbb;
+}
+
+#xb2b_main_box .current-user {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: none;
+    color: #222;
+    font-size: .9em;
+    line-height: 25px;
+}
+
+#xb2b_main_box .current-user .focus-name {
+    font-weight: bold;
+}
+
+#xb2b_main_box .btn-close-chatbox {
+    display: block;
+    width: 30px; height: 23px;
+    position: absolute;
+    right: 1px; top: 1px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer
+}
+
+#xb2b_main_box .btn-close-chatbox:hover {
+    background: #ccc;
+}
+
+#xb2b_main_box .btn-close-chatbox .emdash {
+    display: block;
+    margin: 10px 5px;
+    width: 18px;
+    height: 2px;
+    background: #eb5e00;
+}
+
+#xb2b_main_box .boxes {
+    width: 100%;
+    height: 374px;
+    float: left;
+    margin-top: 25px;
+    border-top: 1px solid #ccc;
+    background: #fff;
+}
+
+#xb2b_main_box .partner-filter {
+    position: absolute;
+    top: 0; left: 0;
+    width: 153px;
+    height: 18px;
+    padding: 3px;
+    border: 1px solid #bbb;
+}
+
+#xb2b_main_box .boxes .customer-list {
+    float: left;
+    width: 160px;
+    height: 374px;
+    overflow: auto;
+    background: #eee;
+}
+
+#xb2b_main_box .boxes .customer-list li{
+    padding: 3px 3px;
+    border-bottom: 1px dotted #ddd;
+    cursor: pointer;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+#xb2b_main_box .boxes .customer-list .customer.filtered {
+    display: none;
+}
+
+#xb2b_main_box .boxes .customer-list li:hover {
+    background: #ddd;
+}
+
+#xb2b_main_box .boxes .customer-list li.active {
+    background: #ccc;
+}
+
+#xb2b_main_box .boxes .customer-list li .unread{
+    display: none;
+    padding: 0 5px;
+    background: #dc0d17;
+    color: white;
+    font-size: .9em;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+#xb2b_main_box .boxes .customer-list li .unread.active {
+    display: inline-block;
+}
+
+#xb2b_main_box .boxes .customer-list li .status {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 4px;
+    background: #63a924;
+    visibility: hidden;
+}
+
+#xb2b_main_box .boxes .customer-list li.online .status {
+    visibility: visible;
+}
+
+#xb2b_main_box .boxes .screen {
+    position: relative;
+    float: left;
+    width: 539px;
+    height: 374px;
+    border-left: 1px solid #ccc;
+    /*box-shadow: -3px 0px 250px 0px #ccc;*/
+}
+
+#xb2b_main_box .boxes .screen .date-navigator {
+    display: none;
+    padding-left: 114px;
+    height: 20px;
+    font-size: .9em;
+    background: #e0f9b6;
+    line-height: 20px;
+}
+
+#xb2b_main_box .boxes .screen .date-navigator .select-date {
+    cursor: pointer;
+}
+
+#xb2b_main_box .boxes .screen .msg-list {
+    display: none;
+    float: left;
+    height: 300px;
+    width: 100%;
+    overflow: auto;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .section-date {
+    padding: 3px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: #ddedeb;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .section-date .hrdate {
+    display: inline-block;
+    /*text-align: center;*/
+    color: #666;
+    font-size: .9em;
+    font-weight: bold;
+    margin-left: 110px;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .msg-item {
+    display: none;
+    padding: 2px;
+    border-bottom: 1px dotted #ddd;
+    font-size: .95em;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .msg-item .msg-content{
+    display: inline-block;
+    width: 70%;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .msg-item .actor-name{
+    display: inline-block;
+    width: 20%;
+    font-weight: bold;
+    vertical-align: top;
+    text-align: right;
+    padding-right: 5px;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .msg-item.actor-1 .actor-name {
+    color: #666;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .msg-item.actor-2 .actor-name {
+    color: #eb5e00;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .msg-item .msg-meta{
+    display: inline-block;
+    color: #bbb;
+    vertical-align: top;
+}
+
+#xb2b_main_box .boxes .screen .enter {
+    bottom: 0;
+    position: absolute;
+    background: #ccc;
+    float: left;
+    width: 100%;
+    height: 54px;
+}
+
+#xb2b_main_box .boxes .screen .enter .txt-in-msg {
+    width: 470px;
+    height: 45px;
+    padding: 2px;
+    margin: 2px 0 2px 2px;
+    float: left;
+    resize: none;
+}
+
+#xb2b_main_box .boxes .screen .enter .btn-send {
+    float: left;
+    margin: 2px;
+    height: 50px;
+    display: block;
+    width: 56px;
+}

@@ -1,0 +1,135 @@
+<script>
+
+    var order = new AdminOrder(<?php echo $this->getOrderDataJson() ?>);
+    order.setLoadBaseUrl('<?php echo $this->getLoadBlockUrl() ?>');
+    var payment = {};
+    payment.switchMethod = order.switchPaymentMethod.bind(order);
+    var priceFormat = <?php echo json_encode(Mage::app()->getLocale()->getJsPriceFormat()); ?>;
+
+</script>
+
+<div id="order-data" class="quote-add">
+    <form id="edit_form" action="<?php echo $this->getSaveUrl() ?>" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="quote_id" name="quote_id" value="<?php echo Mage::getSingleton('adminhtml/session_quote')->getQuote()->getId(); ?>">
+        <input type="hidden" id="customer_id" name="customer_id" value="<?php echo Mage::getSingleton('adminhtml/session_quote')->getQuote()->getData('customer_id'); ?>">
+
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <h1 class="quote-title">&nbsp;<!--Quote #--><?php /*echo Mage::getSingleton('adminhtml/session_quote')->getQuote()->getId(); */?></h1>
+        <div class="button-action">
+            <button class="btn-save-quote" type="button" onclick="saveQuote()">Save quote</button>
+            <button class="btn-save-quote mr10" type="button" onclick="resetQuote()">Reset quote</button>
+            <!--<button type="button">Send quote</button>-->
+        </div>
+        <!--<h3><a href="javascript:" onclick="resetQuote()">Reset Quote</a></h3>-->
+        <?php echo $this->getChildHtml('product_search') ?>
+
+        <?php echo $this->getChildHtml('customer_info') ?>
+
+        <div id="items_area">
+            <div id="order-items" class="entry-edit">
+            <?php echo $this->getChildHtml('items') ?>
+                </div>
+
+            <div id="order-totals" class="order-totals">
+                <?php echo $this->getChildHtml('totals') ?>
+            </div>
+        </div>
+
+        <div class="quote-sidebar">
+
+            <div class="datepicker">
+                <input type="text" id="expired_date" name="expired_date" class="input-text" placeholder="Expired Date" />
+            </div>
+
+            <div class="quote-comment">
+                <span class="label-comment">Note</span>
+                <ul class="comment-history">
+                    <?php foreach($comments as $comt): ?>
+                        <li><strong><?php echo $comt['name']; ?>: </strong><?php echo $comt['msg']; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <textarea spellcheck="false" rows="4" cols="50" name="customer_note" id="customer_note" placeholder=""></textarea>
+            </div>
+
+        </div>
+
+        <div id="order-billing_method">
+            <?php echo $this->getChildHtml('billing_method') ?>
+        </div>
+
+        <div id="order-shipping_method">
+            <?php echo $this->getChildHtml('shipping_method') ?>
+        </div>
+    </form>
+</div>
+
+
+<script>
+
+    jQuery( document ).ready(function() {
+        jQuery("#expired_date").datepicker({
+            minDate: 0,
+            showOn: "button",
+            buttonImageOnly: false,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            showAnim: "drop"
+        });
+
+        var currCustomerId = jQuery("#customer_id").val();
+
+        if(currCustomerId != '' && currCustomerId != 0){
+            loadCustomer(jQuery("#customer_id").val());
+        }
+
+    });
+
+    function resetQuote() {
+        if (confirm('<?php echo $this->__("Are you sure?") ?>')) {
+            window.location.href = '<?php echo $this->getUrl('*/*/clear') ?>';
+        }
+    }
+
+    function saveQuote(){
+        var quote_id = jQuery("#quote_id").val();
+        var customer_id = order.customerId;
+        var expired_date = jQuery("#expired_date").val();
+        var customer_note = jQuery("#customer_note").val();
+        if(customer_id == false){
+            alert('You must choose customer!');
+            return false;
+        }
+        if(jQuery('.order-tables tbody tr').length == 0) {
+            alert('You must add some product!');
+            return false;
+        }
+        if(expired_date == false){
+            alert('You must choose expired date!');
+            return false;
+        }
+        console.log(jQuery('.txt-grand-total span').html());
+        var grand_total = jQuery('.txt-grand-total span').html();
+        //grand_total = parseFloat(grand_total);
+        grand_total = parseInt(grand_total.match(/\d+\.?\d*/g));
+        if(grand_total == 0) {
+            alert('Quotation Total must be greater than 0!');
+            return false;
+        }
+        jQuery('#loading-mask').show();
+        jQuery.ajax({
+            url: '<?php echo $this->getUrl('adminhtml/xb2b/saveQuote') ?>',
+            data: {
+                quote_id: quote_id,
+                expired_date: expired_date,
+                customer_note: customer_note,
+                customer_id: customer_id
+            },
+            dataType: 'json',
+            type:'GET',
+            success: function (data) {
+                location.href = data.redirect;
+            }
+        });
+    }
+
+</script>

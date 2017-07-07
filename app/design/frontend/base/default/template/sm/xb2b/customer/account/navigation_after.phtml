@@ -1,0 +1,15 @@
+<?php echo $this->getChildHtml('nav_child'); ?>
+<div class="block block-account">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('XB2B'); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul>
+            <li><a href="<?php echo Mage::getBaseUrl(); ?>xb2b/setting/address">Address Setting</a></li>
+            <?php if(Mage::getStoreConfig('xb2b/general/enable_quotation') == 1){ ?>
+            <li><a href="<?php echo Mage::getBaseUrl(); ?>xb2b/quotation">Quotation</a></li>
+            <?php } ?>
+            <li><a href="<?php echo Mage::getBaseUrl(); ?>xb2b/quotation/contact">Contact Sales</a></li>
+        </ul>
+    </div>
+</div>

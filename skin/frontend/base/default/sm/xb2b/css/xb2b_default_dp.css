@@ -1,0 +1,51 @@
+.xb2b-setting-address .main,
+.xb2b-quotation-index .main,
+.xb2b-quotation-contact .main {
+	width: 950px;
+}
+.xb2b-quotation-contact .main .my-account > .container {
+	width: 100%;
+}
+
+.xb2b-contact-form button.button span {
+    height: auto;
+}
+
+/* customize chat windows for default package */
+
+#xb2b_main_box .partner-filter {
+    height: 24px !important;
+    width: 149px !important;
+}
+
+.supporter-list .supporter {
+    text-align: left
+}
+
+#xb2b_main_box .boxes .screen .enter .txt-in-msg {
+    width: 430px !important;
+    height: 46px !important;
+}
+
+#xb2b_main_box .boxes .screen .enter .btn-send {
+    text-align: center;
+    height: 54px !important;
+    margin: 1px 0 0 2px !important;
+}
+
+.msg-list .msg-content {
+    text-align: left
+}
+
+#xb2b_main_box .boxes .screen .msg-list .section-date {
+    text-align: left;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .section-date .hrdate {
+    margin-left: 120px !important;
+}
+
+#xb2b_main_box .boxes .screen .date-navigator {
+    text-align: left;
+    padding-left: 122px !important;
+}

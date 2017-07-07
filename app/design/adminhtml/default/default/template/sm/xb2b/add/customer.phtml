@@ -1,0 +1,357 @@
+<div class="search-customer">
+	<div class="search">
+		<label>Search customer</label>
+		<input type="text" id="customer_search" value="" onfocus="this.value='';" placeholder="Phone/Email"
+		       onblur="if(this.value == '') this.value='Phone/Email'"/>
+		<button type="button" value=""></button>
+		<div id="customer_search_autocomplete" class="autocomplete" style="display: none"></div>
+		<span id="customer_search_indicator" style="display: none"></span>
+	</div>
+    <div id="customer_search_error"></div>
+	<div id="customer_search_result" class="search-result" style="display: none">
+		<ul>
+			<li>
+				<label>Customer name:</label>
+				<span id="customer_name"></span>
+				<a href="javascript:" onclick="remove_customer()" class="btn-remove-customer">Remove customer</a>
+			</li>
+			<li>
+				<label>Customer Group:</label>
+				<span id="customer_group"></span>
+			</li>
+			<li>
+				<label>Mobile:</label>
+				<span id="customer_mobile"></span>
+			</li>
+			<li>
+				<label>Email:</label>
+				<span id="customer_email"></span>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div id="order-form_account" style="display: none;">
+	<?php
+		$_fieldsContainerId = 'order-shipping_address_fields';
+		$_countries = Mage::getResourceModel('directory/country_collection')
+			->loadData()
+			->toOptionArray(false);
+	?>
+	<div id="customer_account_fields">
+
+		<!-- billing address-->
+		<div class="box-left" id="billing-details">
+			<fieldset class="np">
+				<div class="order-address" id="billing-<?php echo $_fieldsContainerId ?>">
+					<div class="content" id="order-billing-address-content">
+						<div id="billing-overlay">&nbsp;</div>
+						<input name="order[billing_address][firstname]" type="text"
+						       placeholder="<?php echo $this->__('First Name'); ?>"
+						       class="input-text block notrequired-entry"
+						       id="order-billing_address_address_firstname"
+						       value="<?php echo isset($billingInfo['firstname']) ? $billingInfo['firstname'] : ''; ?>">
+						<input name="order[account][gender]" type="hidden" value="123">
+						</input>
+
+						<input id="order-billing_address_address_lastname" name="order[billing_address][lastname]"
+						       type="text"
+						       placeholder="<?php echo $this->__('Last Name'); ?>"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($billingInfo['lastname']) ? $billingInfo['lastname'] : ''; ?>">
+
+						<input id="order-billing_address_address_street0" name="order[billing_address][street][0]"
+						       type="text"
+						       placeholder="<?php echo $this->__('Street'); ?>"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($billingInfo['street']) ? $billingInfo['street'] : ''; ?>">
+
+						<input id="order-billing_address_address_city" name="order[billing_address][city]"
+						       placeholder="<?php echo $this->__('City'); ?>"
+						       type="text"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($billingInfo['city']) ? $billingInfo['city'] : ''; ?>">
+
+						<select id="order-billing_address_address_country_id" class=" notrequired-entry select"
+						        name="order[billing_address][country_id]" id="order-billing_address_country_id"
+						        onChange="clearBillingRegion()">
+
+							<?php if (count($_countries) > 0): ?>
+								<option value="">-- Please Select --</option>
+								<?php foreach ($_countries as $_country): ?>
+									<option
+										value="<?php echo $_country['value'] ?>" <?php if ($_country['value'] == (isset($billingInfo['country_id']) ? $billingInfo['country_id'] : '')): ?> selected <?php endif ?>>
+										<?php echo $_country['label'] ?>
+									</option>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</select>
+
+						<select id="order-billing_address_address_region_id" name="order[billing_address][region_id]"
+						        title="<?php echo $this->__('State/Province') ?>" class="validate-select"
+						        style="display:none;max-width: 108px;"
+							>
+							<option value="0"><?php echo $this->__('Please select region, state or province') ?></option>
+						</select>
+
+						<select id="order-billing_address_address_region_virtual"
+						        name="order[billing_address][region_virtual]"
+						        title="<?php echo $this->__('State/Province') ?>"
+						        class="validate-select" style="display:none;">
+						</select>
+
+						<input id="order-billing_address_address_region" name="order[billing_address][region]"
+						       type="text"
+						       style="display: none !important;max-width: 108px;"
+						       placeholder="<?php echo $this->__('Region'); ?>"
+						       class="input-text notrequired-entry"
+						       value="<?php echo isset($billingInfo['region']) ? $billingInfo['region'] : ''; ?>">
+
+						<input id="order-billing_address_address_postcode" name="order[billing_address][postcode]"
+						       type="number"
+						       placeholder="<?php echo $this->__('Post Code'); ?>"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($billingInfo['postcode']) ? $billingInfo['postcode'] : ''; ?>">
+
+						<input id="order-billing_address_address_telephone"
+						       placeholder="<?php echo $this->__('Telephone'); ?>"
+						       name="order[billing_address][telephone]" type="number"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($billingInfo['telephone']) ? $billingInfo['telephone'] : ''; ?>">
+
+						<!-- This strict the region load event -->
+						<label class="required">
+							<span class="required"></span>
+						</label>
+
+					</div>
+				</div>
+
+			</fieldset>
+		</div>
+		<!--End billing address-->
+
+		<!--Shipping address-->
+		<div class="box-right" id="shipping-details">
+			<fieldset class="np">
+				<div class="order-address" id="<?php echo $_fieldsContainerId ?>">
+					<div class="content" id="order-address-content">
+						<div id="shipping-overlay">&nbsp;</div>
+
+						<input name="order[shipping_address][firstname]" type="text"
+						       placeholder="<?php echo $this->__('First Name'); ?>"
+						       class="input-text block notrequired-entry"
+						       id="order-shipping_address_address_firstname"
+						       value="<?php echo isset($shippingInfo['firstname']) ? $shippingInfo['firstname'] : ''; ?>">
+						<input id="order-shipping_address_address_lastname" name="order[shipping_address][lastname]"
+						       placeholder="<?php echo $this->__('Last Name'); ?>"
+						       type="text"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($shippingInfo['lastname']) ? $shippingInfo['lastname'] : ''; ?>">
+
+						<input id="order-shipping_address_address_street0" name="order[shipping_address][street][0]"
+						       placeholder="<?php echo $this->__('Street'); ?>"
+						       type="text"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($shippingInfo['street']) ? $shippingInfo['street'] : ''; ?>">
+
+						<input id="order-shipping_address_address_city" name="order[shipping_address][city]"
+						       type="text"
+						       placeholder="<?php echo $this->__('City'); ?>"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($shippingInfo['city']) ? $shippingInfo['city'] : ''; ?>">
+
+						<select id="order-shipping_address_address_country_id" class=" notrequired-entry select"
+						        name="order[shipping_address][country_id]" id="order-shipping_address_country_id"
+						        onChange="clearShippingRegion()">
+
+							<?php if (count($_countries) > 0): ?>
+								<option value="">-- Please Select --</option>
+								<?php foreach ($_countries as $_country): ?>
+									<option
+										value="<?php echo $_country['value'] ?>" <?php if ($_country['value'] == (isset($shippingInfo['country_id']) ? $shippingInfo['country_id'] : '')): ?> selected <?php endif ?>>
+										<?php echo $_country['label'] ?>
+									</option>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</select>
+
+						<select id="order-shipping_address_address_region_id" name="order[shipping_address][region_id]"
+						        title="<?php echo $this->__('State/Province') ?>" class="validate-select"
+						        style="display:none;max-width: 108px;"
+							>
+							<option value="0"><?php echo $this->__('Please select region, state or province') ?></option>
+						</select>
+
+						<select id="order-shipping_address_address_region_virtual" onchange="updateVirtual();"
+						        name="order[shipping_address][region_virtual]"
+						        title="<?php echo $this->__('State/Province') ?>"
+						        class="validate-select" style="display:none;">
+						</select>
+
+						<input id="order-shipping_address_address_region" name="order[shipping_address][region]"
+						       type="text"
+						       style="display:none  !important;max-width: 108px; "
+						       placeholder="<?php echo $this->__('Region'); ?>"
+						       class="input-text notrequired-entry"
+						       value="<?php echo isset($shippingInfo['region']) ? $shippingInfo['region'] : ''; ?>">
+
+						<input id="order-shipping_address_address_postcode" name="order[shipping_address][postcode]"
+						       type="number"
+						       placeholder="<?php echo $this->__('Post code'); ?>"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($shippingInfo['postcode']) ? $shippingInfo['postcode'] : ''; ?>">
+
+						<input id="order-shipping_address_address_telephone"
+						       placeholder="<?php echo $this->__('Telephone'); ?>"
+						       name="order[shipping_address][telephone]" type="number"
+						       class="input-text block notrequired-entry"
+						       value="<?php echo isset($shippingInfo['telephone']) ? $shippingInfo['telephone'] : ''; ?>">
+
+						<!-- This strict the region load event -->
+						<label class="required">
+							<span class="required"></span>
+						</label>
+					</div>
+				</div>
+
+			</fieldset>
+
+		</div>
+		<div class="clear"></div>
+		<!--End shipping address-->
+
+	</div>
+</div>
+
+<script>
+
+	order.shippingAddressContainer = '<?php echo $_fieldsContainerId ?>';
+	new Ajax.Autocompleter(
+		'customer_search',
+		'customer_search_autocomplete',
+		'<?php echo $this->getUrl('adminhtml/xb2b/customerSearch') ?>',
+		{
+			paramName: "query",
+			minChars: 3,
+			indicator: "customer_search_indicator",
+			updateElement: getCustomerSelectionId,
+			evalJSON: 'force',
+			autoSelect: true
+		}
+	);
+
+    function loadCustomer(customer_id){
+        jQuery.ajax({
+            url: '<?php echo $this->getUrl('adminhtml/xb2b/customerLoad') ?>',
+            data: {
+                customer_id: customer_id
+            },
+            type:'GET',
+            success: function (data) {
+                var data = eval("(" + data + ")");
+                order.customerId = data.id;
+                existAddress = {
+                    'firstname': data.firstname,
+                    'lastname': data.lastname,
+                    'street': data.street,
+                    'city': data.city,
+                    'country_id': data.country_id,
+                    'region': data.region,
+                    'region_id': data.billing_region_id,
+                    'postcode': data.postcode,
+                    'telephone': data.telephone,
+
+                    'shipping_firstname': data.shipping_firstname,
+                    'shipping_lastname': data.shipping_lastname,
+                    'shipping_city': data.shipping_city,
+                    'shipping_street': data.shipping_street,
+                    'shipping_country_id': data.shipping_country_id,
+                    'shipping_region': data.shipping_region,
+                    'shipping_region_id': data.shipping_region_id,
+                    'shipping_postcode': data.shipping_postcode,
+                    'shipping_telephone': data.shipping_telephone
+                };
+                setAdd(existAddress);
+                jQuery("#customer_name").html(data.name);
+                jQuery("#customer_group").html(data.group_name);
+                jQuery("#customer_mobile").html(data.telephone);
+                jQuery("#customer_email").html(data.email);
+                jQuery('#customer_search_result').show();
+            }
+        });
+    }
+
+	function getCustomerSelectionId(li) {
+        jQuery('#customer_search_error').html('');
+		if (li.getAttribute('id') == "no_result") {
+            remove_customer();
+            jQuery('#customer_search_error').html('No matching results');
+			return false;
+		}
+		existAddress = {
+			'firstname': li.getAttribute('firstname'),
+			'lastname': li.getAttribute('lastname'),
+			'street': li.getAttribute('street'),
+			'city': li.getAttribute('city'),
+			'country_id': li.getAttribute('country_id'),
+			'region': li.getAttribute('region'),
+			'region_id': li.getAttribute('billing_region_id'),
+			'postcode': li.getAttribute('postcode'),
+			'telephone': li.getAttribute('telephone'),
+
+			'shipping_firstname': li.getAttribute('shipping_firstname'),
+			'shipping_lastname': li.getAttribute('shipping_lastname'),
+			'shipping_city': li.getAttribute('shipping_city'),
+			'shipping_street': li.getAttribute('shipping_street'),
+			'shipping_country_id': li.getAttribute('shipping_country_id'),
+			'shipping_region': li.getAttribute('shipping_region'),
+			'shipping_region_id': li.getAttribute('shipping_region_id'),
+			'shipping_postcode': li.getAttribute('shipping_postcode'),
+			'shipping_telephone': li.getAttribute('shipping_telephone')
+		};
+		order.customerId = li.getAttribute('id');
+		setAdd(existAddress);
+		jQuery("#customer_name").html(li.getAttribute('name'));
+		jQuery("#customer_group").html(li.getAttribute('group_name'));
+		jQuery("#customer_mobile").html(li.getAttribute('telephone'));
+		jQuery("#customer_email").html(li.getAttribute('email'));
+
+        jQuery('#customer_search').val('');
+		order.itemsUpdate();
+
+		jQuery('#customer_search_result').show();
+	}
+
+    function remove_customer(){
+        order.customerId = '';
+        jQuery('#customer_search_result').hide();
+        order.itemsUpdate();
+    }
+
+	function setAdd(arr) {
+		jQuery('#order-shipping_address_address_firstname').val(arr.firstname);
+		jQuery('#order-shipping_address_address_lastname').val(arr.lastname);
+		jQuery('#order-shipping_address_address_street0').val(arr.street);
+		jQuery('#order-shipping_address_address_country_id').val(arr.country_id);
+		//shippingRegionUpdater.update();
+		jQuery('#order-shipping_address_address_city').val(arr.city);
+		jQuery('#order-shipping_address_address_region').val(arr.region);
+		jQuery('#order-shipping_address_address_region_id').val(arr.region_id);
+		jQuery('#order-shipping_address_address_postcode').val(arr.postcode);
+		jQuery('#order-shipping_address_address_telephone').val(arr.telephone);
+
+		jQuery('#order-billing_address_address_firstname').val(arr.firstname);
+		jQuery('#order-billing_address_address_lastname').val(arr.lastname);
+		jQuery('#order-billing_address_address_street0').val(arr.street);
+		jQuery('#order-billing_address_address_country_id').val(arr.country_id);
+		//billingRegionUpdater.update();
+		jQuery('#order-billing_address_address_city').val(arr.city);
+		jQuery('#order-billing_address_address_region').val(arr.region);
+		jQuery('#order-billing_address_address_region_id').val(arr.region_id);
+		jQuery('#order-billing_address_address_postcode').val(arr.postcode);
+		jQuery('#order-billing_address_address_telephone').val(arr.telephone);
+	}
+
+
+</script>

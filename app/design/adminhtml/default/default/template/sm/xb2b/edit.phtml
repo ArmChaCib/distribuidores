@@ -1,0 +1,146 @@
+<script>
+    var order = new AdminOrder(<?php echo $this->getOrderDataJson() ?>);
+    order.setLoadBaseUrl('<?php echo $this->getLoadBlockUrl() ?>');
+    var payment = {};
+    payment.switchMethod = order.switchPaymentMethod.bind(order);
+    var priceFormat = <?php echo json_encode(Mage::app()->getLocale()->getJsPriceFormat()); ?>;
+</script>
+<?php
+
+$currAdminId    = Mage::getSingleton('admin/session')->getUser()->getId();
+$quote          = Mage::registry("quote_edit_$currAdminId");
+$quotation      = Mage::registry("quotation_edit_$currAdminId");
+$coreHelper     = Mage::helper('core');
+$orgQuoteId     = Mage::registry("quote_edit_org_".$quote->getId().'_'.$currAdminId);
+
+//Get comments
+$commentCollection = Mage::getModel('xb2b/quotecomment')->getCollection()
+                                                        ->addFieldToFilter('quotation_id', $quotation->getId());
+$comments = array();
+foreach($commentCollection as $comment) {
+    $name       = '';
+    $ownerType  = $comment->getOwnerType();
+    $ownerId    = $comment->getOwnerId();
+
+    if($ownerType == 1) {
+        $customer = Mage::getModel('customer/customer')->load($ownerId);
+        $name = $customer->getFirstname() . ' ' . $customer->getLastname() . ' at '.$coreHelper->formatTime($comment->getDate()) . ' ' .$coreHelper->formatDate($comment->getDate());
+    } else if($ownerType == 0) {
+        $admin = Mage::getModel('admin/user')->load($ownerId);
+        $name = $admin->getFirstname() . ' ' . $admin->getLastname() . '(supporter) at '.$coreHelper->formatTime($comment->getDate()) . ' ' .date('m/d/Y', $comment->getDate());
+    }
+    $comments[] = array(
+        'name'  => $name,
+        'msg'   => $comment->getContent()
+    );
+}
+?>
+
+<div id="order-data" class="quote-add">
+    <form id="edit_form" action="<?php echo $this->getSaveUrl() ?>" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="quote_id" name="quote_id" value="<?php echo $quote->getId(); ?>">
+        <input type="hidden" id="org_quote_id" name="org_quote_id" value="<?php echo $orgQuoteId; ?>">
+        <input type="hidden" id="customer_id" name="customer_id" value="<?php echo Mage::getSingleton('adminhtml/session_quote')->getQuote()->getData('customer_id'); ?>">
+        <input type="hidden" value="<?php echo $quotation->getId(); ?>" class="quotation_id" id="quotation_id"/>
+
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <?php if($quotation->getQuotationStatus() != 2): ?>
+        <h1 class="quote-title">&nbsp;<!--Quote #--><?php /*echo $quote->getId(); */?></h1>
+
+        <div class="button-action">
+            <button class="btn-save-quote save" type="button">Save quote</button>
+            <button class="btn-unchanged-quote cancel" type="button">Unchanged quote</button>
+            <!--<button type="button">Send quote</button>-->
+        </div>
+        <?php endif; ?>
+
+        <!--<h3><a href="javascript:" onclick="resetQuote()">Reset Quote</a></h3>-->
+
+        <?php echo $this->getChildHtml('product_search') ?>
+
+        <?php echo $this->getChildHtml('customer_info') ?>
+
+        <div id="items_area">
+            <div id="order-items" class="entry-edit">
+                <?php echo $this->getChildHtml('items') ?>
+            </div>
+
+            <div id="order-totals" class="order-totals">
+                <?php echo $this->getChildHtml('totals') ?>
+            </div>
+        </div>
+
+        <div class="quote-sidebar">
+            <div class="datepicker">
+                <input type="text" <?php if($quotation->getQuotationStatus() == 2): ?>disabled="disabled" <?php endif; ?> placeholder="Expire date" id="expired_date" name="expired_date" class="input-text" value="<?php $expDate = $quotation->getExpiredDate(); if(!empty($expDate)) echo date('m/d/Y', $expDate); ?>">
+            </div>
+            <div class="quote-comment">
+                <span class="label-comment">History</span>
+                <ul class="comment-history">
+                    <?php foreach($comments as $comt): ?>
+                        <li><strong><?php echo $comt['name']; ?>: </strong><?php echo $comt['msg']; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php if($quotation->getQuotationStatus() != 2): ?>
+                <textarea spellcheck="false" rows="4" cols="50" name="customer_note" id="customer_note" placeholder="Comment"></textarea>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div id="order-billing_method">
+            <?php echo $this->getChildHtml('billing_method') ?>
+        </div>
+
+        <div id="order-shipping_method">
+            <?php echo $this->getChildHtml('shipping_method') ?>
+        </div>
+
+
+    </form>
+</div>
+
+<script>
+    (function($,W,D) {
+        $(D).ready(function() {
+            $('#expired_date').datepicker({
+                minDate: 0,
+                showOn: "button",
+                buttonImageOnly: false,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showAnim: "drop"
+            });
+
+            $('.btn-unchanged-quote').click(function() {
+                W.location.reload();
+            });
+
+            $('.btn-save-quote').click(function(e) {
+                e.preventDefault();
+                var quote_id = jQuery("#quote_id").val();
+                var customer_id = order.customerId;
+                var expired_date = jQuery("#expired_date").val();
+                var customer_note = jQuery("#customer_note").val();
+                
+                if(expired_date == false){
+                    alert('You must choose expired date!');
+                    return false;
+                }
+
+                $('#loading-mask').show();
+                $.post('<?php echo $this->getUrl('adminhtml/xb2b/saveQuotationEdit') ?>?isAjax=true',
+                    {   quote_id: quote_id, expired_date: expired_date, quotation_id: $('#quotation_id').val(),
+                        customer_note: customer_note, customer_id: customer_id, form_key: FORM_KEY,
+                        org_quote_id : $('#org_quote_id').val()
+                    },
+                    function(rs) {
+                        rs = JSON.parse(rs);
+                        alert('This quote has been saved successfully');
+                        location.href = rs.redirect;
+                    }
+                );
+            });
+        });
+    })(jQuery, window, document);
+
+</script>

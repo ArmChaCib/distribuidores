@@ -1,0 +1,175 @@
+<?php
+    $currAdminId = Mage::getSingleton('admin/session')->getUser()->getId();
+    $this->updateTax();
+    $quote_id = $this->getRequest()->getParam('id');
+    if(isset($quote_id)){
+        $quote = Mage::registry("quote_edit_$currAdminId");
+        $_items = $quote->getItemsCollection();
+    }
+
+    $quotation      = Mage::registry("quotation_edit_$currAdminId");
+?>
+<div id="order-items_grid" class="grid order-edit">
+	<table cellspacing="0" class="data order-tables">
+		<colgroup>
+            <?php if($quotation->getQuotationStatus() != 2): ?>
+			<col width="10">
+            <?php endif; ?>
+			<col width="20">
+			<col width="">
+			<col width="150">
+			<col width="150">
+			<col width="120">
+			<col width="120">
+		</colgroup>
+		<thead>
+		<tr class="headings">
+            <?php if($quotation->getQuotationStatus() != 2): ?>
+			<th class="a-center">Action</th>
+            <?php endif; ?>
+			<th class="a-center">Item ID</th>
+			<th class="a-left">Name</th>
+			<th class="a-center">Qty</th>
+			<th class="a-right">Price</th>
+			<th class="a-center">Tax</th>
+			<th class="a-right">Total</th>
+		</tr>
+		</thead>
+		<tbody>
+        <?php $i = 0; ?>
+        <?php foreach ($_items as $_item){$i++ ?>
+            <tr id="order_item_<?php echo $_item->getId() ?>" item_id="<?php echo $_item->getId() ?>" product_id="<?php echo $_item->getProduct()->getId() ?>" class="hover">
+                <?php if($quotation->getQuotationStatus() != 2): ?>
+                <td class="a-center">
+                    <button class="btn-delete-item button delete" data-item-id="<?php echo $_item->getId(); ?>" type="button">Remove</button>
+                </td>
+                <?php endif; ?>
+                <td class="a-center"><?php echo $_item->getId(); ?></td>
+                <td class="a-left"><h5><span id="order_item_<?php echo $_item->getId() ?>_title"><?php echo $this->htmlEscape($_item->getName()) ?></span></h5>
+                    <div><strong>SKU:</strong><?php echo implode('<br />', Mage::helper('catalog')->splitSku($this->htmlEscape($_item->getSku()))); ?></div>
+                    <?php if ($_item->getMessage(false)): ?>
+                        <?php if ($_item->getHasError()): ?>
+                            <div class="error">
+                                <div style="font-size:95%"><?php echo $_item->getMessage() ?></div>
+                            </div>
+                        <?php else: ?>
+                            <?php foreach ($_item->getMessage(false) as $message): ?>
+                                <div class=">notice">
+                                    <div style="font-size:95%"><?php echo $message; ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </td>
+                <td class="qty a-center"><input <?php if($quotation->getQuotationStatus() == 2): ?>disabled="disabled" <?php endif; ?> id="item_qty_<?php echo $_item->getId() ?>" value="<?php echo $_item->getQty() * 1 ?>" data-item-id="<?php echo $_item->getId(); ?>" name="item[<?php echo $_item->getId() ?>][qty]" class="input-text input-qty" onblur="order.itemsUpdate()"></td>
+                <td class="price a-center">
+                    <input <?php if($quotation->getQuotationStatus() == 2): ?>disabled="disabled" <?php endif; ?> value='<?php echo sprintf("%.2f", $_item->getPrice()/*$this->getOriginalEditablePrice($_item)*/) ?>' data-item-id="<?php echo $_item->getId(); ?>" name="item[<?php echo $_item->getId() ?>][custom_price]" id="item_custom_price_<?php echo $_item->getId() ?>" class="input-text input-price">
+                </td>
+                <td class="a-center"><?php echo sprintf("%.2f",$_item->getTaxPercent()); ?>%</td>
+                <td id="price-<?php echo $_item->getId() ?>" class="a-right">
+                    <?php if ($this->helper('tax')->displayCartBothPrices($this->getStore())): ?>
+                        <br /><span class="label"><?php echo $this->__('Incl. Tax'); ?>:</span>
+                    <?php endif; ?>
+                    <?php $_incl = $this->helper('checkout')->getSubtotalInclTax($_item); ?>
+                    <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales')): ?>
+                        <?php echo $this->formatPrice($_incl + $_item->getWeeeTaxAppliedRowAmount()); ?>
+                    <?php else: ?>
+                        <?php echo $this->formatPrice($_incl - $_item->getWeeeTaxRowDisposition()) ?>
+                    <?php endif; ?>
+                    <?php if (Mage::helper('weee')->getApplied($_item)): ?>
+                        <br />
+                        <?php if (Mage::helper('weee')->typeOfDisplay($_item, 1, 'sales')): ?>
+                            <small>
+                                <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+                                    <span class="nobr"><?php echo $tax['title']; ?>: <?php echo $this->formatPrice($tax['row_amount'], true, true); ?></span><br />
+                                <?php endforeach; ?>
+                            </small>
+                        <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 2, 'sales')): ?>
+                            <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+                                <span class="nobr"><small><?php echo $tax['title']; ?>: <?php echo $this->formatPrice($tax['row_amount_incl_tax'], true, true); ?></small></span><br />
+                            <?php endforeach; ?>
+                        <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 4, 'sales')): ?>
+                            <small>
+                                <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+                                    <span class="nobr"><?php echo $tax['title']; ?>: <?php echo $this->formatPrice($tax['row_amount_incl_tax'], true, true); ?></span><br />
+                                <?php endforeach; ?>
+                            </small>
+                        <?php endif; ?>
+
+                        <?php if (Mage::helper('weee')->typeOfDisplay($_item, 2, 'sales')): ?>
+                            <span class="nobr"><?php echo Mage::helper('weee')->__('Total incl. tax'); ?>:<br /> <?php echo $this->formatPrice($_incl + $_item->getWeeeTaxAppliedRowAmount()); ?></span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php } ?>
+		</tbody>
+	</table>
+</div>
+
+
+<script type="text/javascript">
+    (function($,W,D) {
+        $(D).ready(function() {
+            $('#order-items').on('blur', '.input-qty', function() {
+                var $this = $(this),
+                    quoteId = $('#quote_id').val(),
+                    itemId = $this.data('item-id');
+                $('#loading-mask').show();
+                $.post('<?php echo $this->getUrl('adminhtml/xb2b/ajaxUpdateItemQty') ?>?isAjax=true',
+                    { quote_id: quoteId, item_id: itemId, qty: $this.val(), form_key: FORM_KEY },
+                    function(rs) {
+                        var data = JSON.parse(rs);
+                        data = data.data;
+                        $('#price-'+itemId + ' .price').text(data.line_total);
+                        $('.txt-subtotal .price').text(data.subtotal);
+                        $('.txt-grand-total .price').text(data.grand_total);
+                        $('.txt-total-paid .price').text(data.grand_total);
+                        $('.txt-tax').html(data.tax_amount);
+                        $('#loading-mask').hide();
+                    });
+            });
+
+            $('#order-items').on('click', '.btn-delete-item', function(e) {
+                e.preventDefault();
+                var $this = $(this),
+                    quoteId = $('#quote_id').val(),
+                    itemId = $this.data('item-id');
+                $this.closest('tr').remove();
+                $('#loading-mask').show();
+                $.post('<?php echo $this->getUrl('adminhtml/xb2b/ajaxDeleteItem') ?>?isAjax=true',
+                    { quote_id: quoteId, item_id: itemId, form_key: FORM_KEY },
+                    function(rs) {
+                        var data = JSON.parse(rs);
+                        data = data.data;
+                        $('.txt-subtotal .price').text(data.subtotal);
+                        $('.txt-grand-total .price').text(data.grand_total);
+                        $('.txt-total-paid .price').text(data.grand_total);
+                        $('.txt-tax').html(data.tax_amount);
+                        $('#loading-mask').hide();
+                    });
+            });
+
+            $('#order-items').on('blur', '.input-price', function() {
+                var $this   = $(this),
+                    quoteId = $('#quote_id').val(),
+                    itemId  = $this.data('item-id'),
+                    inPrice = $this.val();
+                $('#loading-mask').show();
+                $.post('<?php echo $this->getUrl('adminhtml/xb2b/ajaxUpdatePrice') ?>?isAjax=true',
+                    { quote_id: quoteId, item_id: itemId, price: inPrice, form_key: FORM_KEY },
+                    function(rs) {
+                        var data = JSON.parse(rs);
+                        data = data.data;
+                        $('#price-'+itemId + ' .price').text(data.line_total);
+                        $('.txt-subtotal .price').text(data.subtotal);
+                        $('.txt-grand-total .price').text(data.grand_total);
+                        $('.txt-total-paid .price').text(data.grand_total);
+                        $('.txt-tax').html(data.tax_amount);
+                        $('#loading-mask').hide();
+                    });
+            });
+
+        });
+    })(jQuery, window, document);
+</script>

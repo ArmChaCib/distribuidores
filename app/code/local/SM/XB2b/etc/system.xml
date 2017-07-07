@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <xb2b translate="label" module="xb2b">
+            <label>X-B2B</label>
+            <tab>sales</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>0</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <heading_general translate="label">
+                            <label>General</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_general>
+                        <enabled translate="label">
+                            <label>Enable X-B2B</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable X-B2B extension.</comment>
+                        </enabled>
+                        <key translate="label">
+                            <label>License Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </key>
+                        <storeid translate="label">
+                            <label>Store view</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_store</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select Store View for quotation in X-B2B</comment>
+                        </storeid>
+
+                        <heading_quotation translate="label">
+                            <label>Quotation</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_quotation>
+                        <enable_quotation translate="label">
+                            <label>Enable Quotation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable Quotation.</comment>
+                        </enable_quotation>
+
+
+                        <heading_bulkorder translate="label">
+                            <label>Bulk Order</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_bulkorder>
+                        <enable_bulk_order translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable Bulk Ordering function.</comment>
+                        </enable_bulk_order>
+                        <show_qty_stock translate="label">
+                            <label>Display available quantity</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_qty_stock>
+                        <heading_quickorder translate="label">
+                            <label>Quick Order</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>82</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_quickorder>
+                        <enable_quickorder translate="label">
+                            <label>Enable Quick Order</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable Quick Order.</comment>
+                        </enable_quickorder>
+                        <enable_one_click translate="label">
+                            <label>Enable One Click</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable One Click function.</comment>
+                        </enable_one_click>
+                        <lucky_search translate="label">
+                            <label>Lucky search</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>When only one result in search, it is added automatically to order</comment>
+                        </lucky_search>
+
+                        <!--<heading_searching_by translate="label">-->
+                            <!--<label>Search</label>-->
+                            <!--<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>-->
+                            <!--<sort_order>13</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                        <!--</heading_searching_by>-->
+
+                        <!--<searching_by translate="label">-->
+                            <!--<label>Search By</label>-->
+                            <!--<frontend_type>multiselect</frontend_type>-->
+                            <!--<source_model>xb2b/system_config_searchby</source_model>-->
+                            <!--<sort_order>14</sort_order>-->
+                            <!--<validate>validate-select</validate>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                            <!--<comment>The more items selected, the slower the search</comment>-->
+                        <!--</searching_by>-->
+
+                        <!--<searching_status translate="label">-->
+                            <!--<label>Search only enabled products</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
+                            <!--<sort_order>15</sort_order>-->
+                            <!--<validate>validate-select</validate>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                            <!--<comment></comment>-->
+                        <!--</searching_status>-->
+
+                        <!--<searching_instock translate="label">-->
+                            <!--<label>Search In Stock Products Only</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
+                            <!--<sort_order>16</sort_order>-->
+                            <!--<validate>validate-select</validate>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                            <!--<comment></comment>-->
+                        <!--</searching_instock>-->
+
+                        <heading_placeorder translate="label">
+                            <label>Place Order</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_placeorder>
+
+                        <payment_method translate="label">
+                            <label>Payment Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>xb2b/system_config_paymentmethods</source_model>
+                            <sort_order>120</sort_order>
+                            <validate>validate-select</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payment_method>
+
+                        <shipping_method translate="label">
+                            <label>Shipping Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>xb2b/system_config_shippingmethods</source_model>
+                            <sort_order>130</sort_order>
+                            <validate>validate-select</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shipping_method>
+
+                        <heading_chat translate="label">
+                            <label>Chat support</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_chat>
+
+                        <enable_chat translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_chat>
+
+                        <chat_speed translate="label">
+                            <label>Update speed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>xb2b/system_config_requestspeed</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </chat_speed>
+                    </fields>
+                </general>
+                <contact translate="label">
+                    <label>Contact SmartOSC</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <comment><![CDATA[
+                    <strong>Report Issue : <a href="http://support.smartosc.com/index.php?/Tickets/Submit/RenderForm/2" target="_blank" >Link to support tickets</a></br></strong>
+                    <strong>Send feedback : <a href="mailto:support@smartosc.com" >support@smartosc.com</a></strong>
+                    <p><strong>X-B2B version 1.0.0</strong></p>
+                    ]]></comment>
+                </contact>
+            </groups>
+        </xb2b>
+    </sections>
+</config>

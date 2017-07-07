@@ -1,0 +1,48 @@
+<?php
+$customers  = $this->getCustomers();
+$admin      = $this->getCurrentAdmin();
+$time_refresh = Mage::getStoreConfig('xb2b/general/chat_speed');
+if(empty($time_refresh)) $time_refresh = 3000;
+
+?>
+
+<script>
+    var TIME_REFRESH    = <?php echo $time_refresh; ?>;
+    var ADMIN_ID        = '<?php echo $admin->getId(); ?>';
+    var ADMIN_NAME      = '<?php echo $admin->getFirstname() . ' ' . $admin->getLastname(); ?>';
+</script>
+
+<div id="xb2b_status_bar">
+    <span class="default-text">Contact customer &uarr;</span>
+    <span class="notification-text"> <strong>0</strong> new messages &uarr;</span>
+</div>
+<div id="xb2b_main_box">
+    <input type="text" placeholder="customer filter..." class="partner-filter" />
+    <div class="current-user"><span class="focus-name"></span></div>
+    <a class="btn-close-chatbox btn-link"><span class="emdash"></span></a>
+
+    <div class="boxes clearfix">
+        <ul class="customer-list">
+            <?php foreach($customers as $customer): ?>
+            <li class="customer" data-id="<?php echo $customer->getId(); ?>">
+                <span class="status"></span>
+                <span class="cname"><?php echo $customer->getFirstname() . ' ' . $customer->getLastname(); ?></span>
+                <span class="unread"></span>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+
+        <div class="screen clearfix">
+            <?php foreach($customers as $customer): ?>
+                <div class="date-navigator" data-id="<?php echo $customer->getId(); ?>">
+                    Show messages from <a class="select-date"></a>
+                </div>
+                <ul class="msg-list msg-list-<?php echo $customer->getId(); ?>"></ul>
+            <?php endforeach; ?>
+            <div class="enter">
+                <textarea class="txt-in-msg" id="input_message"></textarea>
+                <button class="btn-send">Send</button>
+            </div>
+        </div>
+    </div>
+</div>

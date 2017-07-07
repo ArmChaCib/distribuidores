@@ -1,0 +1,88 @@
+<div class="search-product">
+    <div class="search" id="order-search">
+        <label>Search product</label>
+        <input id="product_search" name="query" type="text" class="input-text" placeholder="SKU/Product Name/ID"
+               value="<?php if(! empty($query)) { ?><?php echo $query ?><?php } ?>" onfocus="this.value='';"
+               onblur="if(this.value == '') this.value='SKU/Product Name/ID'"/>
+        <button type="button" value="" class="btn-submit-search"></button>
+        <div id="product_search_autocomplete" class="autocomplete"></div>
+        <span id="product_search_indicator" style="display: none"></span>
+    </div>
+</div>
+
+<script>
+
+	//warehouseId = $.jStorage.get('warehouse_id');
+	var warehouseId = '';
+	var recentProduct = {};
+	var selectedProduct = [];
+	var productTemplateHTML = '';
+
+	productTemplateHTML = '<tr class="hover" id="order_item_{{id}}" product_id="{{id}}">' +
+		'<td class="a-center"><a class="remove"><span><strong><?php echo $this->__("Remove"); ?></strong></span></a></td>' +
+		'<td class="a-center">{{id}}</td>' +
+		'<td class="a-left">' +
+		'<h5><span id="order_item_{{id}}_title">{{name}}</span></h5>' +
+		'<div><strong><?php echo $this->helper('sales')->__('SKU') ?>:</strong>{{sku}}</div>' +
+		'</td>' +
+		'<td class="qty a-center">' +
+		'<input class="input-text input-qty" name="item[{{id}}][qty]" value="{{qty}}" />' +
+		'</td>' +
+		'<td class="price a-center">' +
+		'<input class="input-text input-price" id="item_custom_price_{{id}}"  name="item[{{id}}][custom_price]" value="{{price}}" />' +
+		'</td>' +
+		'<td class="a-center">{{tax}}%</td>' +
+		'<td class="a-right">{{subtotal}}</td>' +
+		'</tr>';
+	var productTemplatePattern = /(^|.|\r|\n)({{(\w+)}})/;
+	var productTemplate = new Template(productTemplateHTML, productTemplatePattern);
+
+
+	new Ajax.Autocompleter(
+		'product_search',
+		'product_search_autocomplete',
+		'<?php echo $this->getUrl('adminhtml/xb2b/productSearch') ?>',
+		{
+			paramName: "query",
+			minChars: 3,
+			indicator: "product_search_indicator",
+			updateElement: getProductSelectionId,
+			evalJSON: 'force',
+			autoSelect: false
+			//parameters: 'warehouse=' + warehouseId
+		}
+	);
+
+	function getProductSelectionId(li) {
+        if (li.getAttribute('id') == "no_result") {
+            return false;
+        }
+        jQuery("#product_search").val('');
+		recentProduct = li;
+		var id = parseInt($(li).readAttribute('id'));
+		var tax = li.readAttribute('tax') == 'null' ? 0 : li.readAttribute('tax');
+        var qty = 1;
+        if(jQuery('tr[product_id="'+id+'"]').length > 0){
+            qty = parseInt(jQuery('tr[product_id="'+id+'"]').find('.input-qty').first().val()) + 1;
+            jQuery('tr[product_id="'+id+'"]').show();
+            jQuery('tr[product_id="'+id+'"]').find('.input-qty').first().val(qty);
+        }else{
+            selectedProduct[id] = {
+                id: li.readAttribute('id'),
+                name: li.readAttribute('name'),
+                qty: 1,
+                sku: li.readAttribute('sku'),
+                price: li.readAttribute('price'),
+                type: li.readAttribute('type'),
+                //tax: Number(tax),
+                tax: '0.00',
+                subtotal: formatCurrency((li.readAttribute('price') ), priceFormat)
+            };
+            $('order-items_grid').select('tbody').first().insert({
+                bottom: productTemplate.evaluate(selectedProduct[id])
+            });
+        }
+		order.itemsUpdate();
+	}
+
+</script>

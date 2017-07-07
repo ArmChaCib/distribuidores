@@ -1,0 +1,117 @@
+<?php
+$currAdminId    = Mage::getSingleton('admin/session')->getUser()->getId();
+$quote          = Mage::registry("quote_edit_$currAdminId");
+$quotation      = Mage::registry("quotation_edit_$currAdminId");
+$couponCode     = $quote->getCouponCode();
+$coupon         = Mage::getModel('salesrule/coupon')->load($couponCode, 'code');
+$couponRule     = Mage::getModel('salesrule/rule')->load($coupon->getRuleId());
+?>
+
+<div class="subtotal">
+    <table width="100%" cellspacing="0">
+        <colgroup>
+            <col>
+            <col width="1">
+        </colgroup>
+        <tbody>
+        <tr>
+            <td class="label a-right">
+                <strong>Order Discount</strong>
+            </td>
+            <td class="emph a-right">
+                <input name="" <?php if($quotation->getQuotationStatus() == 2): ?>disabled="disabled" <?php endif; ?> class="input-text input-discount" value="<?php echo sprintf('%0.2f', $couponRule->getDiscountAmount()); ?>">
+            </td>
+        </tr>
+        <tr>
+            <td class="label a-right">
+                <strong>Subtotal</strong>
+            </td>
+            <td class="emph a-right">
+                <strong class="txt-subtotal">
+                    <?php echo $this->formatPrice($quote->getSubtotal()); ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="label a-right">
+                <strong>Tax</strong>
+            </td>
+            <td class="emph a-right">
+                <?php $taxAmount = $quote->getShippingAddress()->getData('tax_amount'); ?>
+                <strong class="txt-tax"><?php echo $this->formatPrice($taxAmount); ?></strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="label a-right">
+                <strong>Grand Total</strong>
+            </td>
+            <td class="emph a-right">
+                <strong class="txt-grand-total">
+                    <?php echo $this->formatPrice($quote->getGrandTotal()); ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="label a-right">
+                <strong>Total Paid</strong>
+            </td>
+            <td class="emph a-right">
+                <strong class="txt-total-paid">
+                    <?php echo $this->formatPrice($quote->getGrandTotal()); ?>
+                </strong>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    (function($,W,D){
+        var decimalOnly = function(str) {
+            str = str.replace(new RegExp(',', 'g'), '');
+            return parseFloat(str.match(/[\d\.]+/));
+        };
+
+        $(D).ready(function() {
+            $('.input-discount').blur(function() {
+                var $this       = $(this),
+                    quoteId     = $("#quote_id").val(),
+                    quotationId = $("#quotation_id").val(),
+                    discount    = $this.val(),
+                    discountByPercent = false;
+
+                $('#loading-mask').show();
+
+                if((discount).indexOf('%') !== -1) {
+                    var percent = discount.substr(0, discount.length - 1);
+                    var subtotal = $('.txt-subtotal .price').text();
+                    subtotal = decimalOnly(subtotal);
+                    if(percent > 100) {
+                        percent = 100;
+                        $this.val(100+'%');
+                    }
+                    if(percent < 0) {
+                        percent = 0;
+                        $this.val(0+'%');
+                    }
+                    discount = (subtotal / 100) * percent;
+                    discountByPercent = percent;
+                }
+
+                $.post('<?php echo $this->getUrl('adminhtml/xb2b/ajaxUpdateTotalDiscount') ?>?isAjax=true',
+                    {   quote_id: quoteId, quotation_id: quotationId,
+                        discount: discount, by_percent: discountByPercent, form_key: FORM_KEY },
+                    function(rs) {
+                        rs = JSON.parse(rs);
+                        var data = rs.data;
+                        $('.txt-subtotal .price').text(data.subtotal);
+                        $('.txt-grand-total .price').text(data.grand_total);
+                        $('.txt-total-paid .price').text(data.grand_total);
+                        $('.txt-tax').html(data.tax_amount);
+                        $('#loading-mask').hide();
+                    }
+                );
+            });
+        });
+    })(jQuery,window,document);
+</script>

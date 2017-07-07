@@ -1,0 +1,5 @@
+/* Common classes */
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+.clearfix{display:block;}
+* html .clearfix{height:1%;}
+td.number { text-align: right }

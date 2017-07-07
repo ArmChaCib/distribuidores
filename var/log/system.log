@@ -1,0 +1,2 @@
+2016-10-19T20:05:34+00:00 ERR (3): Warning: Missing argument 1 for SM_XB2b_Model_Observer::checkQuotationExpired(), called in /home/oneclick/public_html/distribuidores/app/code/local/SM/XB2b/controllers/Adminhtml/Xb2bController.php on line 83 and defined  in /home/oneclick/public_html/distribuidores/app/code/local/SM/XB2b/Model/Observer.php on line 159
+2016-10-31T01:09:55+00:00 ERR (3): Warning: Error while sending QUERY packet. PID=22409  in /home/oneclick/public_html/distribuidores/includes/src/__default.php on line 66107

@@ -1,0 +1,299 @@
+<layout>
+
+    <xb2b_quickorder_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <file>page/1column.phtml</file>
+            </action>
+        </reference>
+        <reference name="content">
+            <block name="order_main" type="xb2b/QuickOrder_main" template="sm/xb2b/quickorder/main.phtml"/>
+        </reference>
+        <reference name="head">
+            <action method="addCSS">
+                <stylesheet>sm/xb2b/bts/css/bootstrap.min.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="footer">
+            <block name="custom_css_js" type="page/html_head">
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/quickorder.css</stylesheet>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery-2.1.1.min.js</script>
+                </action>
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <script>sm/xb2b/bts/js/bootstrap.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery.ui.widget.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery.debounce-1.0.5.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jstorage.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery.fileupload.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/quickorder.js</script>
+                </action>
+            </block>
+        </reference>
+    </xb2b_quickorder_index>
+
+    <xb2b_setting_address>
+        <update handle="customer_account"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="xb2b/customer_xb2b_setting_address" name="customer_xb2b_setting_address" as="setting_address"
+                   template="sm/xb2b/customer/setting/address_settings.phtml"/>
+        </reference>
+        <reference name="head">
+            <action method="addCSS">
+                <stylesheet>sm/xb2b/bts/css/bootstrap.min.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="footer">
+            <block name="custom_css_js" type="page/html_head">
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/address_setting.css</stylesheet>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery-2.1.1.min.js</script>
+                </action>
+            </block>
+        </reference>
+    </xb2b_setting_address>
+
+    <xb2b_quotation_index>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block name="js_args" type="core/template" template="sm/xb2b/js_args.phtml"/>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="xb2b/customer_xb2b_quotation_list"
+                   name="customer_quotation_list" as="quotation_list"
+                   template="sm/xb2b/customer/quotation/list.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="addCSS">
+                <stylesheet>sm/xb2b/bts/css/bootstrap.min.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="footer">
+            <block name="custom_css_js" type="page/html_head">
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/common.css</stylesheet>
+                </action>
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/quotation.css</stylesheet>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery-2.1.1.min.js</script>
+                </action>
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <script>sm/xb2b/bts/js/bootstrap.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/quotation.js</script>
+                </action>
+            </block>
+        </reference>
+    </xb2b_quotation_index>
+
+    <xb2b_quotation_contact>
+        <update handle="customer_account"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="xb2b/customer_xb2b_quotation_contact" name="customer_quotation_contact" as="quotation_contact"
+                   template="sm/xb2b/customer/quotation/contact.phtml"/>
+        </reference>
+        <reference name="head">
+            <action method="addCSS">
+                <stylesheet>sm/xb2b/bts/css/bootstrap.min.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="footer">
+            <block name="custom_css_js" type="page/html_head">
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/quickorder.css</stylesheet>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery-2.1.1.min.js</script>
+                </action>
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <script>sm/xb2b/bts/js/bootstrap.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery.ui.widget.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery.debounce-1.0.5.js</script>
+                </action>
+            </block>
+        </reference>
+    </xb2b_quotation_contact>
+
+    <catalog_category_default>
+        <reference name="content">
+            <block name="js_args" type="core/template" template="sm/xb2b/js_args.phtml"/>
+        </reference>
+
+        <reference name="footer">
+            <block name="custom_css_js" type="page/html_head">
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/bulkordering.css</stylesheet>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery-2.1.1.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jstorage.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/common.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/bulkordering.js</script>
+                </action>
+            </block>
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_layered>
+        <reference name="content">
+            <block name="js_args" type="core/template" template="sm/xb2b/js_args.phtml"/>
+        </reference>
+
+        <reference name="footer">
+            <block name="custom_css_js" type="page/html_head">
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/bulkordering.css</stylesheet>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery-2.1.1.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jstorage.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/common.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/bulkordering.js</script>
+                </action>
+            </block>
+        </reference>
+    </catalog_category_layered>
+
+    <catalogsearch_result_index>
+        <reference name="content">
+            <block name="js_args" type="core/template" template="sm/xb2b/js_args.phtml"/>
+        </reference>
+
+        <reference name="footer">
+            <block name="custom_css_js" type="page/html_head">
+                <action method="addCSS">
+                    <stylesheet>sm/xb2b/css/bulkordering.css</stylesheet>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jquery-2.1.1.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/jstorage.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/common.js</script>
+                </action>
+                <action method="addJs">
+                    <script>sm/xb2b/bulkordering.js</script>
+                </action>
+            </block>
+        </reference>
+    </catalogsearch_result_index>
+
+    <xb2b_default_design_package>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>sm/xb2b/css/xb2b_default_dp.css</name>
+                <params/>
+            </action>
+        </reference>
+    </xb2b_default_design_package>
+    
+    <xb2b_enterprise_design_package>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>sm/xb2b/css/xb2b_enterprise_dp.css</name>
+                <params/>
+            </action>
+        </reference>
+    </xb2b_enterprise_design_package>
+
+    <xb2b_enable_customer_chat>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>sm/xb2b/css/cssreset-context-min.css</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>sm/xb2b/css/chat.css</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sm/xb2b/jquery.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sm/xb2b/jstorage.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sm/xb2b/chat/fend.js</name>
+                <params/>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block name="customer_chat" type="xb2b/customer_chat" template="sm/xb2b/customer/chat.phtml" />
+        </reference>
+
+        <reference name="footer">
+            <block name="js_args" type="core/template" template="sm/xb2b/js_args.phtml"/>
+        </reference>
+
+    </xb2b_enable_customer_chat>
+
+    <xb2b_enable_quickorder>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="customer">
+                <label>Quick Add</label>
+                <url helper="xb2b/getQuickAddUrl" />
+                <title>B2B Quick Add</title>
+                <prepare/>
+                <urlParams/>
+                <position>10</position>
+            </action>
+        </reference>
+    </xb2b_enable_quickorder>
+</layout>

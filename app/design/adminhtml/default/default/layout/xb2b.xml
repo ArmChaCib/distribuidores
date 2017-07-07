@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_xb2b_index>
+        <reference name="content">
+            <block type="xb2b/adminhtml_quotation_quotation" name="quotation"/>
+        </reference>
+    </adminhtml_xb2b_index>
+    <adminhtml_xb2b_new>
+        <reference name="head">
+            <!--<action method="removeItem"><type>js</type><name>jquery/jQuery.js</name></action>-->
+            <!--<action method="addJs"><file>mage/adminhtml/sales.js</file></action>-->
+            <action method="addJs"><file>sm/xb2b/jquery.js</file></action>
+            <action method="addJs"><file>sm/xb2b/no-conflict.js</file></action>
+            <action method="addJs"><name>sm/xb2b/sales.js</name></action>
+            <action method="addJs"><name>sm/xb2b/jquery-ui-1.10.4.custom.min.js</name></action>
+            <action method="addJs"><file>mage/adminhtml/product/composite/configure.js</file></action>
+            <action method="addItem"><type>skin_css</type><name>sm/xb2b/styles.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>sm/xb2b/ui-lightness/jquery-ui-1.10.4.custom.min.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/sales_order_create_form" name="add_quotation" template="sm/xb2b/add.phtml">
+                <block type="adminhtml/sales_order_create_messages" name="message" />
+                <block type="adminhtml/sales_order_create_form_account" template="sm/xb2b/add/customer.phtml" name="customer_info"/>
+                <block type="page/html" template="sm/xb2b/add/product_search.phtml" name="product_search"/>
+                <block type="adminhtml/sales_order_create_items" template="sm/xb2b/add/items.phtml" name="items">
+                    <block type="xb2b/adminhtml_override_grid" template="sm/xb2b/add/grid.phtml" name="items_grid"></block>
+                </block>
+
+                <block type="adminhtml/sales_order_create_billing_method_form" template="sm/xb2b/add/payment.phtml" name="billing_method"/>
+                <block type="adminhtml/sales_order_create_shipping_method_form" template="sm/xb2b/add/shipment.phtml" name="shipping_method"/>
+                <!--<block type="xb2b/adminhtml_override_coupons" template="sm/xb2b/index/coupons/form.phtml" name="coupons"/>-->
+
+                <block type="xb2b/adminhtml_override_totals" template="sm/xb2b/add/totals.phtml" name="totals"/>
+                <block type="core/text_list" name="order_item_extra_info"></block>
+            </block>
+            <block type="xb2b/adminhtml_override_configure" name="override_configure" template="sm/xb2b/override/configure.phtml"></block>
+        </reference>
+    </adminhtml_xb2b_new>
+    <adminhtml_xb2b_edit>
+        <reference name="head">
+            <!--<action method="removeItem"><type>js</type><name>jquery/jQuery.js</name></action>-->
+            <!--<action method="addJs"><file>mage/adminhtml/sales.js</file></action>-->
+            <action method="addJs"><file>sm/xb2b/jquery.js</file></action>
+            <action method="addJs"><file>sm/xb2b/no-conflict.js</file></action>
+            <action method="addJs"><name>sm/xb2b/sales.js</name></action>
+            <action method="addJs"><name>sm/xb2b/jquery-ui-1.10.4.custom.min.js</name></action>
+            <action method="addJs"><file>mage/adminhtml/product/composite/configure.js</file></action>
+            <action method="addItem"><type>skin_css</type><name>sm/xb2b/style_edit.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>sm/xb2b/ui-lightness/jquery-ui-1.10.4.custom.min.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/sales_order_create_form" name="edit_quotation" template="sm/xb2b/edit.phtml">
+                <block type="adminhtml/sales_order_create_messages" name="message" />
+                <block type="page/html" template="sm/xb2b/edit/product_search.phtml" name="product_search"/>
+                <block type="adminhtml/sales_order_create_form_account" template="sm/xb2b/edit/customer.phtml" name="customer_info"/>
+                <block type="adminhtml/sales_order_create_items" template="sm/xb2b/edit/items.phtml" name="items">
+                    <block type="xb2b/adminhtml_override_grid" template="sm/xb2b/edit/grid.phtml" name="items_grid"></block>
+                </block>
+
+                <block type="adminhtml/sales_order_create_billing_method_form" template="sm/xb2b/edit/payment.phtml" name="billing_method"/>
+                <block type="adminhtml/sales_order_create_shipping_method_form" template="sm/xb2b/edit/shipment.phtml" name="shipping_method"/>
+                <!--<block type="xb2b/adminhtml_override_coupons" template="sm/xb2b/index/coupons/form.phtml" name="coupons"/>-->
+
+                <block type="xb2b/adminhtml_override_totals" template="sm/xb2b/edit/totals.phtml" name="totals"/>
+                <block type="core/text_list" name="order_item_extra_info"></block>
+            </block>
+            <block type="xb2b/adminhtml_override_configure" name="override_configure" template="sm/xb2b/override/configure.phtml"></block>
+        </reference>
+    </adminhtml_xb2b_edit>
+    <adminhtml_xb2b_load_block_plain>
+        <reference name="root">
+            <block type="core/text_list" name="content" />
+        </reference>
+    </adminhtml_xb2b_load_block_plain>
+    <adminhtml_xb2b_load_block_json>
+        <reference name="root">
+            <block type="xb2b/adminhtml_override_load" name="content" />
+        </reference>
+    </adminhtml_xb2b_load_block_json>
+    <adminhtml_xb2b_load_block_items>
+        <reference name="content">
+            <block type="adminhtml/sales_order_create_items" template="sm/xb2b/add/items.phtml" name="items">
+                <block type="xb2b/adminhtml_override_grid" template="sm/xb2b/add/grid.phtml" name="items_grid"></block>
+            </block>
+            <block type="core/text_list" name="order_item_extra_info"></block>
+        </reference>
+    </adminhtml_xb2b_load_block_items>
+    <adminhtml_xb2b_load_block_billing_method>
+        <reference name="content">
+            <block type="adminhtml/sales_order_create_billing_method_form" template="sm/xb2b/add/payment.phtml" name="billing_method"/>
+        </reference>
+    </adminhtml_xb2b_load_block_billing_method>
+    <adminhtml_xb2b_load_block_shipping_method>
+        <reference name="content">
+            <block type="adminhtml/sales_order_create_shipping_method_form" template="sm/xb2b/add/shipment.phtml" name="shipping_method"/>
+        </reference>
+    </adminhtml_xb2b_load_block_shipping_method>
+
+    <adminhtml_xb2b_load_block_totals>
+        <reference name="content">
+            <block type="xb2b/adminhtml_override_totals" template="sm/xb2b/add/totals.phtml" name="totals"/>
+        </reference>
+    </adminhtml_xb2b_load_block_totals>
+
+    <xb2b_enable_chat>
+        <reference name="content">
+            <block name="customer_chat" type="xb2b/adminhtml_customer_chat" template="sm/xb2b/customer/chat.phtml" />
+        </reference>
+
+        <reference name="footer">
+            <block name="js_args" type="core/template" template="sm/xb2b/js_args.phtml"/>
+        </reference>
+
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>sm/xb2b/chat.css</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sm/xb2b/jquery.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sm/xb2b/jstorage.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sm/xb2b/chat/bend.js</name>
+                <params/>
+            </action>
+        </reference>
+    </xb2b_enable_chat>
+
+    <adminhtml_xassign_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xb2b/adminhtml_permissions_customer_grid" name="permissions_customer_grid"/>
+        </block>
+    </adminhtml_xassign_grid>
+
+    <adminhtml_xgroupassign_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xb2b/adminhtml_permissions_group_grid" name="permissions_group_grid"/>
+        </block>
+    </adminhtml_xgroupassign_grid>
+</layout>

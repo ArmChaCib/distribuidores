@@ -1,0 +1,71 @@
+.xb2b-quotation-contact .main .my-account > .container {
+	width: 100%;
+}
+.xb2b-quotation-contact .main .my-account .scaffold-form .form-list label {
+	text-align: left;
+}
+
+.xb2b-contact-form .form-list label {
+    width: 225px;
+}
+
+.xb2b-contact-form label.required:after, span.required:after {
+    color: red;
+    content: " *";
+    font-family: "Helvetica Neue",Verdana,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.xb2b-contact-form a.button span, button.button span span {
+    background-position: 100% 0;
+    color: #c73615;
+    display: inline-block;
+    font: bold 12px/22px Arial,Helvetica,sans-serif;
+    height: 21px;
+    padding: 0 15px 1px 5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Customize for chat */
+#xb2b_status_bar .default-text {
+	font-size: 1.3em;
+}
+
+#xb2b_main_box .partner-filter {
+    height: 24px !important;
+    width: 149px !important;
+}
+
+.supporter-list .supporter {
+    text-align: left
+}
+
+#xb2b_main_box .boxes .screen .enter .txt-in-msg {
+    width: 430px !important;
+    height: 46px !important;
+}
+
+#xb2b_main_box .boxes .screen .enter .btn-send {
+    text-align: center;
+    height: 54px !important;
+    margin: 1px 0 0 2px !important;
+}
+
+.msg-list .msg-content {
+    text-align: left
+}
+
+#xb2b_main_box .boxes .screen .msg-list .section-date {
+    text-align: left;
+}
+
+#xb2b_main_box .boxes .screen .msg-list .section-date .hrdate {
+    margin-left: 120px !important;
+}
+
+#xb2b_main_box .boxes .screen .date-navigator {
+    text-align: left;
+    padding-left: 122px !important;
+}

@@ -1,0 +1,22 @@
+<?php echo $this->getChildHtml('toolbar_child'); ?>
+<?php $XB2B = Mage::helper('xb2b')->loadXB2BConfig(); ?>
+<div class="bulk-order-toolbar clearfix">
+    <div class="left-buttons">
+        <?php if($XB2B['enable_quickorder']): ?>
+            <button class="btn-goto-quickorder button clear-fix" onclick="location.href='<?php echo Mage::getBaseUrl().'xb2b/QuickOrder'; ?>'"><span><span class="clear-all">Quick Add</span></span></button>
+        <?php endif; ?>
+    </div>
+    <div class="cart-buttons">
+        <button class="btn-clear-products button clear-fix"><span><span class="clear-all">Clear</span></span></button>
+
+        <button disabled
+                data-cart-url="<?php echo Mage::getBaseUrl().'xb2b/cart/add'; ?>"
+                class="btn-add-products-to-cart button clear-fix"
+                title="Add all products to cart"
+                data-form-key="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>"
+                data-url-encode="<?php echo $this->helper('core/url')->getEncodedUrl(); ?>">
+            <span><span class="add-all">Add All</span></span>
+            <img class="loading deactivate" src="<?php echo $this->getSkinUrl('sm/xb2b/images/loading.gif'); ?>" alt=""/>
+        </button>
+    </div>
+</div>

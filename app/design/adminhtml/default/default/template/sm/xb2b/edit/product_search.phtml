@@ -1,0 +1,118 @@
+<?php
+$currAdminId    = Mage::getSingleton('admin/session')->getUser()->getId();
+$quotation      = Mage::registry("quotation_edit_$currAdminId");
+?>
+
+<div class="search-product">
+	<div class="search" id="order-search">
+		<label>Search product</label>
+		<input id="product_search" <?php if($quotation->getQuotationStatus() == 2): ?>disabled="disabled" <?php endif; ?> name="query" type="text" class="input-text" placeholder="SKU/Product Name/ID"
+		       value="<?php if(! empty($query)) { ?><?php echo $query ?><?php } ?>" onfocus="this.value='';"
+		       onblur="if(this.value == '') this.value='SKU/Product Name/ID'"/>
+		<button type="button" value="" class="btn-submit-search"></button>
+		<div id="product_search_autocomplete" class="autocomplete"></div>
+		<span id="product_search_indicator" style="display: none"></span>
+	</div>
+</div>
+
+<script>
+    function getProductHtml(product, item) {
+        return '<tr id="order_item_'+item.item_id+'" item_id="'+item.item_id+'" product_id="'+product.id+'" class="hover">'+
+            '<td class="a-center">'+
+            '<button class="btn-delete-item button delete" data-item-id="'+item.item_id+'" type="button">Remove</button>'+
+            '</td>'+
+            '<td class="a-center">'+item.item_id+'</td>'+
+            '<td class="a-left"><h5><span id="order_item_'+item.item_id+'_title">'+product.name+'</span></h5>'+
+            '<div><strong>SKU:</strong>'+product.sku+'</div>'+
+            '</td>'+
+            '<td class="qty a-center"><input id="item_qty_'+item.item_id+'" value="1" data-item-id="'+item.item_id+'" name="item['+item.item_id+'][qty]" class="input-text input-qty"></td>'+
+            '<td class="price a-center">'+
+            '<input value="'+item.item_price+'" data-item-id="'+item.item_id+'" name="item['+item.item_id+'][custom_price]" id="item_custom_price_'+item.item_id+'" class="input-text input-price">'+
+            '</td>'+
+            '<td class="a-center">'+item.tax.toFixed(2)+'%</td>'+
+            '<td id="price-'+item.item_id+'" class="a-right">'+
+            '<span class="price">'+item.line_total+'</span></td>'+
+            '</tr>';
+    }
+
+	new Ajax.Autocompleter(
+		'product_search',
+		'product_search_autocomplete',
+		'<?php echo $this->getUrl('adminhtml/xb2b/productSearch') ?>',
+		{
+			paramName: "query",
+			minChars: 3,
+			indicator: "product_search_indicator",
+			updateElement: getProductSelectionId,
+			evalJSON: 'force',
+			autoSelect: false
+//			parameters: 'warehouse=' + warehouseId
+		}
+	);
+
+	function getProductSelectionId(li) {
+        if (li.getAttribute('id') == "no_result") {
+            return false;
+        }
+        jQuery("#product_search").val('');
+//		recentProduct = li;
+		var id = parseInt($(li).readAttribute('id'));
+		var tax = li.readAttribute('tax') == 'null' ? 0 : li.readAttribute('tax');
+        var checkRow = jQuery('tr[product_id="'+id+'"]');
+        if(checkRow.length > 0) {
+            var qtyElement = jQuery('tr[product_id="'+id+'"] .input-qty');
+            var qty = parseInt(qtyElement.val()) + 1;
+            checkRow.show();
+            qtyElement.val(qty);
+            //Update qty
+            var quoteId = jQuery('#quote_id').val(),
+                itemId = checkRow.attr('item_id');
+            jQuery('#loading-mask').show();
+            jQuery.post('<?php echo $this->getUrl('adminhtml/xb2b/ajaxUpdateItemQty') ?>?isAjax=true',
+                { quote_id: quoteId, item_id: itemId, qty: qty, form_key: FORM_KEY },
+                function(rs) {
+                    var data = JSON.parse(rs);
+                    data = data.data;
+                    jQuery('#price-'+itemId + ' .price').text(data.line_total);
+                    jQuery('.txt-subtotal .price').text(data.subtotal);
+                    jQuery('.txt-grand-total .price').text(data.grand_total);
+                    jQuery('.txt-total-paid .price').text(data.grand_total);
+                    jQuery('.txt-tax').html(data.tax_amount);
+                    jQuery('#loading-mask').hide();
+                });
+        } else {
+            jQuery('#loading-mask').show();
+            jQuery.post('<?php echo $this->getUrl('adminhtml/xb2b/ajaxAddProductToQuote') ?>?isAjax=true',
+                { quote_id: jQuery('#quote_id').val(), product_id: li.readAttribute('id'), form_key: FORM_KEY },
+                function(rs) {
+                    rs = JSON.parse(rs);
+                    if(rs.error == 1) {
+                        alert(rs.msg);
+                        jQuery('#loading-mask').hide();
+                    } else {
+                        var newItemHtml = getProductHtml({
+                            id: li.readAttribute('id'),
+                            name: li.readAttribute('name'),
+                            qty: 1,
+                            sku: li.readAttribute('sku'),
+                            price: li.readAttribute('price'),
+                            type: li.readAttribute('type'),
+                            //tax: Number(tax),
+                            tax: '0.00',
+                            subtotal: formatCurrency((li.readAttribute('price') ), priceFormat)
+                        }, rs.data);
+                        var data = rs.data;
+                        jQuery('.order-tables tbody').append(newItemHtml);
+                        jQuery('.txt-subtotal .price').text(data.subtotal);
+                        jQuery('.txt-grand-total .price').text(data.grand_total);
+                        jQuery('.txt-total-paid .price').text(data.grand_total);
+                        jQuery('.txt-tax').html(data.tax_amount);
+                        jQuery('#loading-mask').hide();
+                    }
+                });
+
+        }
+
+	}
+
+</script>

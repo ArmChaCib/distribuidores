@@ -1,0 +1,125 @@
+<?php
+    $customer_data = Mage::getSingleton('customer/session')->getCustomer();
+    if($customer_data->getPrimaryBillingAddress()){
+        $customer_mobile = $customer_data->getPrimaryBillingAddress()->getData('telephone');
+    }
+?>
+<div class="container xb2b-contact-form">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="group-title">Contact Sales</h1>
+            <!--<span class="sub-text"><em>Set default addresses which used to create order</em></span>-->
+            <div class="hori-line"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <form action="<?php echo Mage::getBaseUrl().'xb2b/quotation/sendContact'; ?>" method="post" autocomplete="off" id="form-validate" class="scaffold-form" enctype="multipart/form-data">
+                <div class="fieldset">
+                    <?php echo $this->getBlockHtml('formkey')?>
+                    <h2 class="legend"><?php echo $this->__('Request Call Back') ?></h2>
+                    <ul class="form-list">
+                        <ul class="form-list">
+                            <li>
+                                <label class="required" for="contact_content">Topic</label>
+                                <div class="input-box">
+                                    <textarea class="input-text required-entry" title="Topic" value="" id="contact_content" name="contact_content" spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
+                                </div>
+                            </li>
+                            <li>
+                                <label for="contact_time">Best time to reach me</label>
+                                <div class="input-box">
+                                    <input type="text" class="input-text required-entry" title="Best time to reach me" value="" id="contact_time" name="contact_time" spellcheck="false" autocorrect="off" autocapitalize="off">
+                                </div>
+                            </li>
+                            <li>
+                                <label class="required" for="contact_mobile">Phone Number</label>
+                                <div class="input-box">
+                                    <input type="text" class="input-text required-entry" title="Phone Number" value="<?php echo $customer_mobile; ?>" id="contact_mobile" name="contact_mobile" spellcheck="false" autocorrect="off" autocapitalize="off">
+                                </div>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="buttons-set">
+                    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+                    <button type="button" title="<?php echo $this->__('Send') ?>" class="button" onclick="sendContact()"><span><span><?php echo $this->__('Send') ?></span></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dialogSendContact" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Order Creating" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Send Request Call Back</h4>
+            </div>
+            <div class="modal-body">
+                <h4 id="order_loading">Your request is being processed
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </h4>
+                <span class="order-error"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-default btn-close-modal" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function sendContact(){
+
+        var contact_content = jQuery('#contact_content').val();
+        var contact_time = jQuery('#contact_time').val();
+        var contact_mobile = jQuery('#contact_mobile').val();
+        if(contact_content == ''){
+            alert('You must fill content of request');
+            return false;
+        }
+        if(contact_mobile == ''){
+            alert('You must fill your phone number');
+            return false;
+        }
+
+        var modal = jQuery('#dialogSendContact');
+        modal.modal('show');
+        jQuery('#order_loading').fadeIn('fast');
+
+        jQuery.ajax({
+            url: '<?php echo Mage::getBaseUrl().'xb2b/quotation/sendContact'; ?>',
+            data: {
+                contact_content: contact_content,
+                contact_time: contact_time,
+                contact_mobile: contact_mobile
+            },
+            /*dataType: 'json',*/
+            type:'POST',
+            success: function (data) {
+                if(data == 'oke'){
+                    modal.find('.modal-title').text('YOUR REQUEST HAS BEEN SENT.');
+                    var modalBody = '<div><h2>THANK YOU!</h2>Your request for a call back is sent successfully. We will call you back as soon as possible.</div>';
+                    modal.find('.modal-body').html(modalBody);
+                    jQuery('#dialogCreateOrder .btn-close-modal').show();
+                    jQuery('#dialogCreateOrder .btn-continue-shop').show();
+
+                    jQuery('#contact_content').val('');
+                    jQuery('#contact_time').val('');
+                    jQuery('#contact_mobile').val('');
+
+                }else{
+                    jQuery('#order_loading').hide();
+                    jQuery('.order-error').html(data).show();
+                    jQuery('#dialogCreateOrder .btn-close-modal').show();
+                }
+            }
+        });
+    }
+
+</script>
